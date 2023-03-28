@@ -19,7 +19,7 @@
                         {{ __('homepage') }}
                     </x-nav-link>
 
-          
+
 
                 </div>
             </div>
