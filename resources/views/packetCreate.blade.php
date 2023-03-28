@@ -36,11 +36,44 @@
                     </div>
                     <div class="form-group">
                         <label for="shipping_address">Shipping Address:</label>
-                        <textarea name="shipping_address" class="form-control" required></textarea>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="shipping_streetname" class="form-control" placeholder="Street Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="shipping_housenumber" class="form-control" placeholder="House Number" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="shipping_city" class="form-control" placeholder="City" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="shipping_zipcode" class="form-control" placeholder="Zip Code" required>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="form-group">
                         <label for="delivery_address">Delivery Address:</label>
-                        <textarea name="delivery_address" class="form-control" required></textarea>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="delivery_streetname" class="form-control" placeholder="Street Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="delivery_housenumber" class="form-control" placeholder="House Number" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="delivery_city" class="form-control" placeholder="City" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="delivery_zipcode" class="form-control" placeholder="Zip Code" required>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Create Packet</button>
                 </form>
