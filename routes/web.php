@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//route to PacketController
+Route::get('/packets', [App\Http\Controllers\PacketController::class, 'index']);
+Route::post('/packets', [App\Http\Controllers\PacketController::class, 'store'])->name('packets.store');
