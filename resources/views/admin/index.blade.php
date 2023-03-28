@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Admin') }}
+            {{ __('admin.admin') }}
         </h2>
     </x-slot>
     <!-- list of all users -->
@@ -13,10 +13,10 @@
                         <div class="container">
                             <div class="row">
                                  <span class="col">
-                            {{ __('List of Users') }}
+                            {{ __('admin.user_list') }}
                         </span>
                                 <span class="col">
-                            <a href="{{ route('admin.create') }}" class="btn btn-primary">{{ __('Create') }}</a>
+                            <a href="{{ route('admin.create') }}" class="btn btn-primary">{{ __('admin.create') }}</a>
                         </span>
                             </div>
                         </div>
@@ -26,12 +26,12 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th scope="col">{{ __('ID') }}</th>
-                                <th scope="col">{{ __('Name') }}</th>
-                                <th scope="col">{{ __('Email') }}</th>
-                                <th scope="col">{{ __('Created At') }}</th>
-                                <th scope="col">{{ __('Updated At') }}</th>
-                                <th scope="col">{{ __('Actions') }}</th>
+                                <th scope="col">{{ __('admin.id') }}</th>
+                                <th scope="col">{{ __('admin.name') }}</th>
+                                <th scope="col">{{ __('admin.email') }}</th>
+                                <th scope="col">{{ __('admin.created_at') }}</th>
+                                <th scope="col">{{ __('admin.updated_at') }}</th>
+                                <th scope="col">{{ __('admin.actions') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,7 +47,7 @@
                                         <form action="{{ route('admin.destroy', $user->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">{{ __('Delete') }}</button>
+                                            <button type="submit" class="btn btn-danger">{{ __('admin.delete') }}</button>
                                         </form>
                                     </td>
                                 </tr>

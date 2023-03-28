@@ -37,4 +37,11 @@ Route::get('/admin/create', [\App\Http\Controllers\AdminController::class, 'crea
 Route::post('/admin/store', [\App\Http\Controllers\AdminController::class, 'store'])->name('admin.store')->middleware('auth');
 Route::post('/admin/destroy', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.destroy')->middleware('auth');
 
+
+Route::get('locale/{locale}', function ($locale) {
+    App::setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->name('locale');
+
 require __DIR__.'/auth.php';
