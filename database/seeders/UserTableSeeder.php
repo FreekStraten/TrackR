@@ -34,5 +34,42 @@ class UserTableSeeder extends Seeder
             'user_role' => 2,
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'CasUser',
+            'email' => 'CasUser@gmail.com',
+            'password' => hash::make('Cas'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_role' => 2,
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'CasAdmin',
+            'email' => 'CasAdmin@gmail.com',
+            'password' => hash::make('Cas'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_role' => 1,
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'FreekUser',
+            'email' => 'FreekUser@gmail.com',
+            'password' => hash::make('Freek'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_role' => 2,
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'FreekAdmin',
+            'email' => 'FreekAdmin@gmail.com',
+            'password' => hash::make('Freek'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_role' => 1,
+        ]);
+
+
     }
 }

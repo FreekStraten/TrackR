@@ -15,16 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
-        });
 
+        });
         // alter the users table
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('user_role')
+            $table->foreignId('user_role')->default(2)
                 ->references('id')
                 ->on('user_roles')
                 ->onDelete('cascade');
         });
-
     }
 
     /**

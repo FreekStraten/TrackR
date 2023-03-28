@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use Illuminate\Validation\Rules;
 
 class AdminController extends Controller
 {
@@ -12,7 +15,11 @@ class AdminController extends Controller
      */
     public function index() : View
     {
-        return view('admin.index');
+        // get all users
+        $users = User::all();
+
+
+        return view('admin.index', ['users' => $users]);
     }
 
     /**
@@ -20,7 +27,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -28,7 +35,25 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // register new account with data from request and save to db. Redirect to index
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'user_role' => '2',
+        ]);
+
+
+
+        $user->save();
+
+        return redirect()->route('admin.index');
     }
 
     /**
