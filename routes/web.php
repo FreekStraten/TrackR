@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/create-package', 'packetCreate');
+
 //route to PacketController
-Route::get('/packets', [App\Http\Controllers\PacketController::class, 'index']);
-Route::post('/packets', [App\Http\Controllers\PacketController::class, 'store'])->name('packets.store');
+//Route::get('/packets', [\App\Http\Controllers\API\PacketController::class, 'index']);
+//Route::post('/packets', [\App\Http\Controllers\API\PacketController::class, 'store'])->name('packets.store');
