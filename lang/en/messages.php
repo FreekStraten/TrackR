@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'create_packet' => 'Create a Packet',
+    'create_packet' => 'Create a Package',
     'date' => 'Date:',
     'tracking_number' => 'Tracking Number:',
     'format' => 'Format:',

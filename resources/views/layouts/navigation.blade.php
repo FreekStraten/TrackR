@@ -19,16 +19,24 @@
                         {{ __('nav.homepage') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('create-package')" :active="request()->routeIs('create-package')">
+                        {{ trans('messages.create_packet') }}
+                    </x-nav-link>
+
+
+
                     @if(!is_null(Auth::user()) && Auth::user()->isSuperAdmin())
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
                         {{ __('index') }}
                     </x-nav-link>
                     @endif
 
+
+
                     <!-- dropdown to change language -->
                     <x-dropdown align="left" width="48">
                         <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150 mt-3">
                                 <div>{{ __('nav.language') }}</div>
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
