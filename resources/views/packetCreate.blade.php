@@ -2,61 +2,86 @@
 <html>
 <head>
     <title>Create a Packet</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-{{--@extends('layouts.app')--}}
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Create a Packet</h1>
             <hr>
+            <h1 id="title">{{ trans('messages.create_packet') }}</h1>
             <form method="PUT" action="/api/packets">
                 <div class="form-group">
-                    <label for="date">Date:</label>
+                    <label for="date">{{ trans('messages.date') }}</label>
                     <input type="date" name="date" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="tracking_number">Tracking Number:</label>
+                    <label for="tracking_number">{{ trans('messages.tracking_number') }}</label>
                     <input type="text" name="tracking_number" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="format">Format:</label>
+                    <label for="format">{{ trans('messages.format') }}</label>
                     <select name="format" class="form-control" required>
-                        <option value="letter">Letter</option>
-                        <option value="parcel">Parcel</option>
+                        <option value="letter">{{ trans('messages.letter') }}</option>
+                        <option value="parcel">{{ trans('messages.parcel') }}</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="weight">Weight (in grams):</label>
+                    <label for="weight">{{ trans('messages.weight') }}</label>
                     <input type="number" name="weight" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="shipping_street">Shipping Street:</label>
-                    <input type="text" name="shipping_street" class="form-control" required>
+                    <label for="shipping_address">{{ trans('messages.shipping_address') }}</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="shipping_streetname" class="form-control"
+                                   placeholder="{{ trans('messages.street_name') }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="shipping_housenumber" class="form-control"
+                                   placeholder="{{ trans('messages.house_number') }}" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="shipping_city" class="form-control"
+                                   placeholder="{{ trans('messages.city') }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="shipping_zipcode" class="form-control"
+                                   placeholder="{{ trans('messages.zip_code') }}" required>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="shipping_city">Shipping City:</label>
-                    <input type="text" name="shipping_city" class="form-control" required>
+                    <label for="delivery_address">{{ trans('messages.delivery_address') }}</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="delivery_streetname" class="form-control"
+                                   placeholder="{{ trans('messages.street_name') }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="delivery_housenumber" class="form-control"
+                                   placeholder="{{ trans('messages.house_number') }}" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="delivery_city" class="form-control"
+                                   placeholder="{{ trans('messages.city') }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="delivery_zipcode" class="form-control"
+                                   placeholder="{{ trans('messages.zip_code') }}" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="shipping_zip">Shipping Zip Code:</label>
-                    <input type="text" name="shipping_zip" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="delivery_street">Delivery Street:</label>
-                    <input type="text" name="delivery_street" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="delivery_city">Delivery City:</label>
-                    <input type="text" name="delivery_city" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="delivery_zip">Delivery Zip Code:</label>
-                    <input type="text" name="delivery_zip" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Create Packet</button>
+                <button type="submit" class="btn btn-primary">{{ trans('messages.create_packet_button') }}</button>
             </form>
         </div>
     </div>
