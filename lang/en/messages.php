@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'create_packet' => 'Create a Package',
+    'create_packet' => 'Create a package',
     'date' => 'Date:',
     'tracking_number' => 'Tracking Number:',
     'format' => 'Format:',
@@ -15,4 +15,7 @@ return [
     'city' => 'City',
     'zip_code' => 'Zip code',
     'create_packet_button' => 'Create a package',
+    'upload' => 'Upload',
+    'choose_file' => 'Choose a file',
+    'upload_csv' => 'Upload CSV packages',
 ];

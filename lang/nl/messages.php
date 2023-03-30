@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'create_packet' => 'Pakket Maken',
+    'create_packet' => 'Pakket maken',
     'date' => 'Datum:',
     'tracking_number' => 'Tracking Nummer:',
     'format' => 'Formaat:',
@@ -15,4 +15,7 @@ return [
     'city' => 'Stad',
     'zip_code' => 'Postcode',
     'create_packet_button' => 'Maak een Pakket',
+    'upload' => 'Upload',
+    'choose_file' => 'Kies een bestand',
+    'upload_csv' => 'Upload CSV Pakketten',
 ];
