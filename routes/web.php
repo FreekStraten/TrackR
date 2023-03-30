@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 //Route::view('/create-package', 'packetCreate')->name('create-package');
 
+Route::post('/competitions', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
+
 Route::get('/create-package', function () {
     return view('packetCreate');
 })->name('create-package');
@@ -27,6 +29,8 @@ Route::get('/create-package', function () {
 //route to PacketController
 //Route::get('/packets', [\App\Http\Controllers\API\PacketController::class, 'index']);
 //Route::post('/packets', [\App\Http\Controllers\API\PacketController::class, 'store'])->name('packets.store');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -12,7 +12,8 @@
             <div class="col-md-12">
                 <hr>
                 <h1 id="title">{{ trans('messages.create_packet') }}</h1>
-                <form method="PUT" action="/api/packets">
+                <form method="POST" action={{ route('packet_create.store') }}>
+                    @csrf
                     <div class="form-group">
                         <label for="date">{{ trans('messages.date') }}</label>
                         <input type="date" name="date" class="form-control" required>
@@ -40,7 +41,7 @@
                                        placeholder="{{ trans('messages.street_name') }}" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="shipping_housenumber" class="form-control"
+                                <input type="number" name="shipping_housenumber" class="form-control"
                                        placeholder="{{ trans('messages.house_number') }}" required>
                             </div>
                         </div>
@@ -65,7 +66,7 @@
                                        placeholder="{{ trans('messages.street_name') }}" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="delivery_housenumber" class="form-control"
+                                <input type="number" name="delivery_housenumber" class="form-control"
                                        placeholder="{{ trans('messages.house_number') }}" required>
                             </div>
                         </div>
