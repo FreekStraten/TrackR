@@ -18,17 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::view('/create-package', 'packetCreate')->name('create-package');
 
-Route::post('/competitions', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
+Route::post('/package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
+
+Route::post('/package_csv', [App\Http\Controllers\PacketController::class, 'uploadCsv'])->name('packet_create.uploadCsv');
 
 Route::get('/create-package', function () {
     return view('packetCreate');
 })->name('create-package');
 
-//route to PacketController
-//Route::get('/packets', [\App\Http\Controllers\API\PacketController::class, 'index']);
-//Route::post('/packets', [\App\Http\Controllers\API\PacketController::class, 'store'])->name('packets.store');
+
 
 
 

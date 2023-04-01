@@ -4,20 +4,16 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
               crossorigin="anonymous">
-
-
     </head>
+
     <body>
-
-
     <div class="container">
-
         <h3 id="title" class="mt-3 mb-3">{{ trans('messages.upload_csv') }}</h3>
-        <form method="POST" class="text-left mt-1.5 mb-0">
+        <form method="POST" action="{{ route('packet_create.uploadCsv') }}" class="text-left mt-1.5 mb-0" enctype="multipart/form-data">
             @csrf
             <label for="csv_file" class="btn btn-secondary mt-2">
                 {{ trans('messages.choose_file') }}
-                <input type="file" name="csv_file" id="csv_file" accept=".csv" class="w-0 h-0">
+                <input type="file" name="csv_file" id="csv_file" accept=".csv" class="">
             </label>
 
             <button type="submit" class="btn btn-primary">{{ trans('messages.upload') }}</button>
@@ -97,7 +93,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">{{ trans('messages.create_packet_button') }}</button>
+                    <button type="submit"
+                            class="btn btn-primary">{{ trans('messages.create_packet_button') }}</button>
                 </form>
             </div>
         </div>
