@@ -37,23 +37,7 @@ class PacketController extends Controller
 
     public function uploadCsv(Request $request)
     {
-
         $file = $request->file('csv_file');
-
-
-
-
-        //data dump all the text inside the file
-//        $file = fopen($file, "r");
-//        while(! feof($file))
-//        {
-//            print_r(fgetcsv($file));
-//        }
-//        fclose($file);
-
-
-
-
 
         if (($handle = fopen($request->file('csv_file')->getPathname(), 'r')) !== false) {
 
@@ -85,7 +69,4 @@ class PacketController extends Controller
 
         return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
-
-
-
 }
