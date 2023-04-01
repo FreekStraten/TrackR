@@ -13,7 +13,7 @@
             @csrf
             <label for="csv_file" class="btn btn-secondary mt-2">
                 {{ trans('messages.choose_file') }}
-                <input type="file" name="csv_file" id="csv_file" accept=".csv" class="">
+                <input type="file" name="csv_file" id="csv_file" accept=".csv" class="w-0 h-0">
             </label>
 
             <button type="submit" class="btn btn-primary">{{ trans('messages.upload') }}</button>

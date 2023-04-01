@@ -79,7 +79,7 @@ class PacketController extends Controller
 
                 $packet->save();
             }
-            
+
             fclose($handle);
         }
 
