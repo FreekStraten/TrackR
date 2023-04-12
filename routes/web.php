@@ -18,18 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::view('/create-package', 'packetCreate')->name('create-package');
 
-Route::post('/competitions', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
+Route::post('/sore-package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
 
 Route::get('/create-package', function () {
     return view('packetCreate');
 })->name('create-package');
-
-//route to PacketController
-//Route::get('/packets', [\App\Http\Controllers\API\PacketController::class, 'index']);
-//Route::post('/packets', [\App\Http\Controllers\API\PacketController::class, 'store'])->name('packets.store');
-
 
 
 Route::get('/dashboard', function () {
@@ -50,6 +44,8 @@ Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->n
 Route::get('/admin/create', [\App\Http\Controllers\AdminController::class, 'create'])->name('admin.create')->middleware('auth');
 Route::post('/admin/store', [\App\Http\Controllers\AdminController::class, 'store'])->name('admin.store')->middleware('auth');
 Route::post('/admin/destroy', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.destroy')->middleware('auth');
+
+
 
 
 Route::get('locale/{locale}', function ($locale) {
