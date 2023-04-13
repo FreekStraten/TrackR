@@ -51,7 +51,8 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'remember_token',
-        'user_role'
+        'user_role',
+        'api_key'
     ];
 
     public function user_role()

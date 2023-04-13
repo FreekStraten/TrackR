@@ -23,4 +23,9 @@ class Packet extends Model
         'delivery_city',
         'delivery_zip_code',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

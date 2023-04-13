@@ -2,16 +2,31 @@
 
 namespace App\Http\Controllers;
 
-//use App\Http\Controllers\Request;
 use App\Models\Packet;
 use Illuminate\Http\Request;
 
-
 class PacketController extends Controller
 {
-    //index
     public function store(Request $request)
     {
+        // Check if request has an API key
+        if ($request->has('api_key')) {
+            $user = \App\Models\User::where('api_key', $request->api_key)->first();
+
+            // Check if user with provided API key exists
+            if (!$user) {
+                return response()->json(['message' => 'Invalid API key.'], 401);
+            }
+        } else {
+            // If no API key provided, get the authenticated user
+            $user = auth()->user();
+
+            // Check if user is authenticated
+            if (!$user) {
+                return response()->json(['message' => 'Unauthorized.'], 401);
+            }
+        }
+
         $packet = new Packet([
             'date' => $request['date'],
             'tracking_number' => $request['tracking_number'],
@@ -27,8 +42,16 @@ class PacketController extends Controller
             'delivery_zip_code' => $request['delivery_zipcode'],
         ]);
 
+        $packet->user()->associate($user); // associate the user with the packet
         $packet->save();
 
-        return redirect()->route('create-package')->with('success', 'Packet created successfully.');
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Packet created successfully.',
+                'packet' => $packet
+            ]);
+        } else {
+            return view('packetCreate')->with('success', 'Packet created successfully.');
+        }
     }
 }
