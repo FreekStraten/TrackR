@@ -27,9 +27,10 @@ class PacketController extends Controller
             }
         }
 
+
         $packet = new Packet([
             'date' => $request['date'],
-            'tracking_number' => $request['tracking_number'],
+            'tracking_number' => rand(1000000000, 9999999999),
             'format' => $request['format'],
             'weight' => $request['weight'],
             'shipping_street' => $request['shipping_streetname'],

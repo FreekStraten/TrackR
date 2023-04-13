@@ -19,10 +19,6 @@
                         <input type="date" name="date" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="tracking_number">{{ trans('messages.tracking_number') }}</label>
-                        <input type="text" name="tracking_number" class="form-control" required>
-                    </div>
-                    <div class="form-group">
                         <label for="format">{{ trans('messages.format') }}</label>
                         <select name="format" class="form-control" required>
                             <option value="letter">{{ trans('messages.letter') }}</option>
