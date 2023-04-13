@@ -67,4 +67,9 @@ class User extends Authenticatable
     public function isUser() :bool {
         return $this->user_role == 2;
     }
+
+    public function packets()
+    {
+        return $this->hasMany(Packet::class, 'user_id');
+    }
 }

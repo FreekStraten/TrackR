@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class PacketController extends Controller
 {
+    public function index()
+    {
+        $user = auth()->user(); // Get the authenticated user
+
+        $packets = $user->packets; // Get all packets associated with the user
+
+        // Return the view with the packetList
+        return view('packetList', [
+            'packets' => $packets,
+        ]);
+    }
+
     public function store(Request $request)
     {
         // Check if request has an API key
@@ -27,10 +39,9 @@ class PacketController extends Controller
             }
         }
 
-
         $packet = new Packet([
             'date' => $request['date'],
-            'tracking_number' => rand(1000000000, 9999999999),
+            'tracking_number' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
             'format' => $request['format'],
             'weight' => $request['weight'],
             'shipping_street' => $request['shipping_streetname'],

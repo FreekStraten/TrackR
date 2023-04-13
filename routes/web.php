@@ -23,6 +23,9 @@ Route::get('/create-package', function () {
 })->name('create-package');
 
 
+Route::get('/packets', [App\Http\Controllers\PacketController::class, 'index'])->middleware('auth')->name('user-packets-list');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -43,12 +46,10 @@ Route::post('/admin/store', [\App\Http\Controllers\AdminController::class, 'stor
 Route::post('/admin/destroy', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.destroy')->middleware('auth');
 
 
-
-
 Route::get('locale/{locale}', function ($locale) {
     App::setLocale($locale);
     session()->put('locale', $locale);
     return redirect()->back();
 })->name('locale');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
