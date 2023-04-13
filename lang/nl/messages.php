@@ -18,4 +18,7 @@ return [
     'create_packet_button' => 'Maak een Pakket',
     'packets_list' => 'Pakketten Lijst',
     'my_packets' => 'Mijn Pakketten',
+    'upload' => 'Upload',
+    'choose_file' => 'Kies een bestand',
+    'upload_csv' => 'Upload CSV Pakketten',
 ];

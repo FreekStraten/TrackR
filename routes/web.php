@@ -16,11 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/store-package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
 
+
 Route::middleware('api')->post('/api/packages', [App\Http\Controllers\PacketController::class, 'store']);
+
+
+Route::post('/package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
+
+Route::post('/package_csv', [App\Http\Controllers\PacketController::class, 'uploadCsv'])->name('packet_create.uploadCsv');
 
 Route::get('/create-package', function () {
     return view('packetCreate');
 })->name('create-package');
+
 
 
 Route::get('/packets', [App\Http\Controllers\PacketController::class, 'index'])->middleware('auth')->name('user-packets-list');

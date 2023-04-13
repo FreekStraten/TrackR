@@ -18,4 +18,7 @@ return [
     'create_packet_button' => 'Create a package',
     'packets_list' => 'Packages list',
     'my_packets' => 'My packages',
+    'upload' => 'Upload',
+    'choose_file' => 'Choose a file',
+    'upload_csv' => 'Upload CSV packages',
 ];
