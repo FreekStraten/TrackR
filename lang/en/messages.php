@@ -21,4 +21,6 @@ return [
     'upload' => 'Upload',
     'choose_file' => 'Choose a file',
     'upload_csv' => 'Upload CSV packages',
+    'forum' => 'Forum',
+    'add_csv' => 'Add CSV',
 ];

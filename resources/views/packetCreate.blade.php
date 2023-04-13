@@ -20,14 +20,14 @@
             <div
                 class="bg-white overflow-hidden shadow-xl sm:rounded-lg inline-block px-2 mr-1 cursor-pointer active-tab"
                 data-tab="tab1">
-                Pakket Maken
+                {{ __('messages.forum') }}
             </div>
         </div>
 
         <div class="pt-10">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg inline-block px-2 cursor-pointer"
                  data-tab="tab2">
-                CSV Importeren
+                {{ __('messages.add_csv') }}
             </div>
         </div>
     </div>
@@ -117,12 +117,14 @@
 
                             <!-- Packet CSV Creation !-->
                             <div id="tab2" class="tab-content" style="display:none;">
-                                <form method="POST" enctype="multipart/form-data" action={{ route('packet_create.uploadCsv') }}>
+                                <h3 class="font-semibold text text-gray-800 leading-tight">{{ __('messages.upload_csv') }}</h3>
+                                <form method="POST" action="{{ route('packet_create.uploadCsv') }}" class="text-left mt-1.5 mb-0" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="form-group">
-                                        <label for="csv">{{ __('messages.choose_file') }}</label>
-                                        <input type="file" name="csv" accept=".csv" class="form-control-file" required>
-                                    </div>
+                                    <label for="csv_file" class="btn btn-secondary mt-2">
+                                        {{ __('messages.choose_file') }}
+                                        <input type="file" name="csv_file" id="csv_file" accept=".csv" class="w-0 h-0">
+                                    </label>
+
                                     <button type="submit" class="btn btn-primary">{{ __('messages.upload') }}</button>
                                 </form>
                             </div>
@@ -133,6 +135,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const tabButtons = document.querySelectorAll('[data-tab]');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tab = button.dataset.tab;
+                tabContents.forEach(content => {
+                    if (content.id === tab) {
+                        content.style.display = 'block';
+                    } else {
+                        content.style.display = 'none';
+                    }
+                });
+                tabButtons.forEach(btn => btn.classList.remove('active-tab'));
+                button.classList.add('active-tab');
+            });
+        });
+    </script>
 
     </body>
 </x-app-layout>
