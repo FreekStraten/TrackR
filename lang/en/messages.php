@@ -2,12 +2,13 @@
 
 return [
     'create_packet' => 'Create a Package',
-    'date' => 'Date:',
+    'date' => 'Date',
     'tracking_number' => 'Tracking Number:',
-    'format' => 'Format:',
+    'format' => 'Format',
     'letter' => 'Letter',
     'parcel' => 'Parcel',
     'weight' => 'Weight (in gram):',
+    'short_weight' => 'Weight',
     'shipping_address' => 'Shipping address:',
     'delivery_address' => 'Delivery address:',
     'street_name' => 'Street name',
@@ -15,4 +16,11 @@ return [
     'city' => 'City',
     'zip_code' => 'Zip code',
     'create_packet_button' => 'Create a package',
+    'packets_list' => 'Packages list',
+    'my_packets' => 'My packages',
+    'upload' => 'Upload',
+    'choose_file' => 'Choose a file',
+    'upload_csv' => 'Upload CSV packages',
+    'forum' => 'Forum',
+    'add_csv' => 'Add CSV',
 ];

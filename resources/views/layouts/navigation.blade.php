@@ -20,7 +20,11 @@
                     </x-nav-link>
 
                     <x-nav-link :href="route('create-package')" :active="request()->routeIs('create-package')">
-                        {{ trans('messages.create_packet') }}
+                        {{ __('messages.create_packet') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('user-packets-list')" :active="request()->routeIs('user-packets-list')">
+                        {{ __('messages.packets_list') }}
                     </x-nav-link>
 
 
