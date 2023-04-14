@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Packet;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Barryvdh\DomPDF\PDF;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
 
 class PacketController extends Controller
 {
@@ -106,11 +110,30 @@ class PacketController extends Controller
         return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
 
+    //METHOD JUST FOR TESTING
     public function packetLabel($id)
     {
         $packet = Packet::find($id);
         return view('packetLabel', compact('packet'));
     }
+
+    //create a pdf packet label for all packets of the user
+    //METHOD JUST FOR TESTING
+    public function packetLabels()
+    {
+        $user = auth()->user(); // Get the authenticated user
+        $packets = $user->packets; // Get all packets associated with the user
+        return view('packetLabels', compact('packets'));
+    }
+
+
+    public function createLabels() {
+        $user = auth()->user(); // Get the authenticated user
+        $packets = $user->packets; // Get all packets associated with the user
+        $pdf = app('dompdf.wrapper')->loadView('packetLabels', compact('packets'));
+        return $pdf->download('packetLabel.pdf');
+    }
+
 
     //create a pdf packet label for the packet use dompdf
     public function createLabel($id)
@@ -119,7 +142,4 @@ class PacketController extends Controller
         $pdf = app('dompdf.wrapper')->loadView('packetLabel', compact('packet'));
         return $pdf->download('packetLabel.pdf');
     }
-
-
-
 }
