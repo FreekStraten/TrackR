@@ -23,4 +23,5 @@ return [
     'upload_csv' => 'Upload CSV packages',
     'forum' => 'Forum',
     'add_csv' => 'Add CSV',
+    'actions' => "Action",
 ];

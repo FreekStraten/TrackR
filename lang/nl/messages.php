@@ -23,4 +23,5 @@ return [
     'upload_csv' => 'Upload CSV Pakketten',
     'forum' => 'Forum',
     'add_csv' => 'Voeg CSV toe',
+    'actions' => "Actie",
 ];
