@@ -27,4 +27,5 @@ return [
     'packet_label' => 'Pakket Label',
     'generated_by_trackr' => 'Gegenereerd door TrackR',
     'bulk_pdf' => 'Bulk PDF',
+    'all_formats' => 'Alle formaten',
 ];

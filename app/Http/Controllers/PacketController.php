@@ -13,15 +13,27 @@ use Illuminate\Support\Facades\File;
 
 class PacketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = auth()->user(); // Get the authenticated user
+        $user = auth()->user();
 
-        $packets = $user->packets; // Get all packets associated with the user
+        $query = $user->packets(); // Start with all packets associated with the user
 
-        // Return the view with the packetList
+        //order by date
+        $query = $query->orderBy('date', 'asc');
+
+        // Check if a format filter is applied
+        $format = $request->input('format');
+        if (!empty($format)) {
+            // Filter packets by format
+            $query = $query->where('format', $format);
+        }
+
+        $packets = $query->paginate(10); // Paginate the filtered packets with 10 items per page
+
         return view('packetList', [
             'packets' => $packets,
+            'selectedFormat' => $format, // pass the selected format to the view
         ]);
     }
 
