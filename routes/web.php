@@ -16,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/store-package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
 
-
 Route::middleware('api')->post('/api/packages', [App\Http\Controllers\PacketController::class, 'store']);
-
 
 Route::post('/package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
 
@@ -28,10 +26,9 @@ Route::get('/create-package', function () {
     return view('packetCreate');
 })->name('create-package');
 
-
-
 Route::get('/packets', [App\Http\Controllers\PacketController::class, 'index'])->middleware('auth')->name('user-packets-list');
 
+Route::get('/create-label/{id}', [App\Http\Controllers\PacketController::class, 'createLabel'])->middleware('auth')->name('createLabel');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -60,3 +57,6 @@ Route::get('locale/{locale}', function ($locale) {
 })->name('locale');
 
 require __DIR__ . '/auth.php';
+
+//create a route to packetLabel.blade.php
+Route::get('/packetLabel/{id}', [App\Http\Controllers\PacketController::class, 'packetLabel'])->middleware('auth')->name('packetLabel');

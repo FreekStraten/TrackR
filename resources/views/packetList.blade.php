@@ -18,12 +18,13 @@
                             <th>{{ __('messages.short_weight') }}</th>
                             <th>{{ __('messages.shipping_address') }}</th>
                             <th>{{ __('messages.delivery_address') }}</th>
+                            <th>{{ __('messages.actions') }}</th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(isset($packets))
                             @foreach($packets as $packet)
-                                <tr>
+                                <tr class="align-middle">
                                     <td>{{ $packet->date }}</td>
                                     <td>{{ $packet->tracking_number }}</td>
                                     <td>{{ $packet->format }}</td>
@@ -32,6 +33,9 @@
                                         , {{ $packet->shipping_zip_code }} {{ $packet->shipping_city }}</td>
                                     <td>{{ $packet->delivery_street }}, {{ $packet->delivery_house_number }}
                                         , {{ $packet->delivery_zip_code }} {{ $packet->delivery_city }}</td>
+                                    <td><a href="{{ route('createLabel', ['id' => $packet->id]) }}"
+                                           class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded-md shadow-md">PDF</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif

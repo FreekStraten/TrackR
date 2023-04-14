@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Packet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\PDF;
 
 class PacketController extends Controller
 {
@@ -104,4 +105,21 @@ class PacketController extends Controller
 
         return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
+
+    public function packetLabel($id)
+    {
+        $packet = Packet::find($id);
+        return view('packetLabel', compact('packet'));
+    }
+
+    //create a pdf packet label for the packet use dompdf
+    public function createLabel($id)
+    {
+        $packet = Packet::find($id);
+        $pdf = app('dompdf.wrapper')->loadView('packetLabel', compact('packet'));
+        return $pdf->download('packetLabel.pdf');
+    }
+
+
+
 }
