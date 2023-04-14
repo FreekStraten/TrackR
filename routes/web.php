@@ -30,6 +30,8 @@ Route::get('/packets', [App\Http\Controllers\PacketController::class, 'index'])-
 
 Route::get('/create-label/{id}', [App\Http\Controllers\PacketController::class, 'createLabel'])->middleware('auth')->name('createLabel');
 
+Route::get('/labels', [App\Http\Controllers\PacketController::class, 'createLabels'])->middleware('auth')->name('createLabels');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -60,3 +62,6 @@ require __DIR__ . '/auth.php';
 
 //create a route to packetLabel.blade.php
 Route::get('/packetLabel/{id}', [App\Http\Controllers\PacketController::class, 'packetLabel'])->middleware('auth')->name('packetLabel');
+
+//create a route to packetLabels function
+Route::get('/packetLabels', [App\Http\Controllers\PacketController::class, 'packetLabels'])->middleware('auth')->name('packetLabels');

@@ -5,7 +5,14 @@
         </h3>
     </x-slot>
 
-    <div class="py-12">
+    <div class="flex max-w-7xl mx-auto sm:px-6 lg:px-8 justify-end mb-1">
+        <div class="pt-10">
+            <a href="{{ route('createLabels') }}"
+               class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-1.5 px-3 rounded-md shadow-md no-underline">{{ __('messages.bulk_pdf') }}</a>
+        </div>
+    </div>
+
+    <div class="pt-1 pb-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
@@ -34,7 +41,7 @@
                                     <td>{{ $packet->delivery_street }}, {{ $packet->delivery_house_number }}
                                         , {{ $packet->delivery_zip_code }} {{ $packet->delivery_city }}</td>
                                     <td><a href="{{ route('createLabel', ['id' => $packet->id]) }}"
-                                           class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded-md shadow-md">PDF</a>
+                                           class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded-md shadow-md no-underline">PDF</a>
                                     </td>
                                 </tr>
                             @endforeach

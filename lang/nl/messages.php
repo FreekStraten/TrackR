@@ -26,4 +26,5 @@ return [
     'actions' => "Actie",
     'packet_label' => 'Pakket Label',
     'generated_by_trackr' => 'Gegenereerd door TrackR',
+    'bulk_pdf' => 'Bulk PDF',
 ];
