@@ -8,19 +8,39 @@
     <div class="pt-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-2.5 flex justify-between items-center">
-                <div class="w-1/3 ml-2">
-                    <form action="{{ route('user-packets-list') }}" method="GET" class="w-1/3 ml-2">
+
+                <div class="w-2/3 ml-2 flex">
+                    <form action="{{ route('user-packets-list') }}" method="GET" class="w-full mx-2 flex">
+
+                        <input type="hidden" name="page" value="{{ $packets->currentPage() }}">
+                        
                         <label for="format" class="sr-only">{{ __('messages.format') }}</label>
-                        <select name="format" id="format" class="form-control" onchange="this.form.submit()" required>
+                        <select name="format" id="format" class="form-control mr-2" onchange="this.form.submit()">
                             <option value=""{{ empty($selectedFormat) ? ' selected' : '' }}>{{ __('messages.all_formats') }}</option>
                             <option value="letter"{{ $selectedFormat === 'letter' ? ' selected' : '' }}>{{ __('messages.letter') }}</option>
                             <option value="parcel"{{ $selectedFormat === 'parcel' ? ' selected' : '' }}>{{ __('messages.parcel') }}</option>
                         </select>
+
+                        <label for="sortByDate" class="sr-only">{{ __('messages.sort_by_date') }}</label>
+                        <select name="sortByDate" id="sortByDate" class="form-control mr-2" onchange="this.form.submit()">
+                            <option value="">{{ __('messages.no_date') }}</option>
+                            <option value="asc"{{ $sortByDate === 'asc' ? ' selected' : '' }}>{{ __('messages.date_asc') }}</option>
+                            <option value="desc"{{ $sortByDate === 'desc' ? ' selected' : '' }}> {{__('messages.date_desc') }}</option>
+                        </select>
+
+                        <label for="sortDirection" class="sr-only">{{ __('messages.  sort_direction') }}</label>
+                        <select name="sortDirection" id="sortDirection" class="form-control mr-2" onchange="this.form.submit()">
+                            <option value="">{{ __('messages.no_weight') }}</option>
+                            <option value="asc"{{ $sortDirection === 'asc' ? ' selected' : '' }}>{{ __('messages.weight_asc') }}</option>
+                            <option value="desc"{{ $sortDirection === 'desc' ? ' selected' : '' }}> {{__('messages.weight_desc') }}</option>
+                        </select>
+
                     </form>
                 </div>
+
                 <div class="w-2/3 text-right mr-2">
                     <a href="{{ route('createLabels') }}"
-                       class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-1.5 px-3 rounded-md shadow-md no-underline">{{ __('messages.bulk_pdf') }}</a>
+                       class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-md shadow-md no-underline">{{ __('messages.bulk_pdf') }}</a>
                 </div>
             </div>
         </div>
@@ -66,13 +86,9 @@
                     </table>
                 </div>
                 <div class="pb-6 mx-4">
-                    {{--                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">--}}
-                    {{--                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">--}}
                     <div class="align-middle">
                         {{ $packets->links() }}
                     </div>
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
                 </div>
             </div>
         </div>

@@ -17,23 +17,38 @@ class PacketController extends Controller
     {
         $user = auth()->user();
 
-        $query = $user->packets(); // Start with all packets associated with the user
-
-        //order by date
-        $query = $query->orderBy('date', 'asc');
-
-        // Check if a format filter is applied
         $format = $request->input('format');
+        $sortByDate = $request->input('sortByDate');
+        $sortDirection = $request->input('sortDirection');
+        $page = $request->input('page', 1);
+
+        $query = $user->packets();
+
         if (!empty($format)) {
-            // Filter packets by format
             $query = $query->where('format', $format);
         }
 
-        $packets = $query->paginate(10); // Paginate the filtered packets with 10 items per page
+        if (!empty($sortByDate)) {
+            $query = $query->orderBy('date', $sortByDate);
+        }
+
+        if (!empty($sortDirection)) {
+            $query = $query->orderBy('weight', $sortDirection);
+        }
+
+        $packets = $query->paginate(10, ['*'], 'page', $page);
+
+        $packets->appends([
+            'format' => $format,
+            'sortByDate' => $sortByDate,
+            'sortDirection' => $sortDirection,
+        ]);
 
         return view('packetList', [
             'packets' => $packets,
-            'selectedFormat' => $format, // pass the selected format to the view
+            'selectedFormat' => $format,
+            'sortByDate' => $sortByDate,
+            'sortDirection' => $sortDirection,
         ]);
     }
 
