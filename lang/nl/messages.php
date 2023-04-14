@@ -3,12 +3,12 @@
 return [
     'create_packet' => 'Pakket Maken',
     'date' => 'Datum',
-    'tracking_number' => 'Tracking Nummer:',
+    'tracking_number' => 'Tracking Nummer',
     'format' => 'Formaat',
     'letter' => 'Brief',
     'parcel' => 'Pakket',
     'weight' => 'Gewicht (in gram)',
-    'short_weight' => 'Gewicht:',
+    'short_weight' => 'Gewicht',
     'shipping_address' => 'Verzendadres',
     'delivery_address' => 'Afleveradres',
     'street_name' => 'Straatnaam',
@@ -24,4 +24,6 @@ return [
     'forum' => 'Forum',
     'add_csv' => 'Voeg CSV toe',
     'actions' => "Actie",
+    'packet_label' => 'Pakket Label',
+    'generated_by_trackr' => 'Gegenereerd door TrackR',
 ];
