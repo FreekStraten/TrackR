@@ -27,4 +27,13 @@ return [
     'packet_label' => 'Pakket Label',
     'generated_by_trackr' => 'Gegenereerd door TrackR',
     'bulk_pdf' => 'Bulk PDF',
+    'all_formats' => 'Alle formaten',
+    'sort_by_date' => 'Datum',
+    'date_asc' => 'Datum oplopend',
+    'date_desc' => 'Datum aflopend',
+    'no_date' => 'Geen datum filter',
+    'weight_asc' => 'Gewicht oplopend',
+    'weight_desc' => 'Gewicht aflopend',
+    'no_weight' => 'Geen gewicht filter'
+
 ];

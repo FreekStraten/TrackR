@@ -13,15 +13,42 @@ use Illuminate\Support\Facades\File;
 
 class PacketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = auth()->user(); // Get the authenticated user
+        $user = auth()->user();
 
-        $packets = $user->packets; // Get all packets associated with the user
+        $format = $request->input('format');
+        $sortByDate = $request->input('sortByDate');
+        $sortDirection = $request->input('sortDirection');
+        $page = $request->input('page', 1);
 
-        // Return the view with the packetList
+        $query = $user->packets();
+
+        if (!empty($format)) {
+            $query = $query->where('format', $format);
+        }
+
+        if (!empty($sortByDate)) {
+            $query = $query->orderBy('date', $sortByDate);
+        }
+
+        if (!empty($sortDirection)) {
+            $query = $query->orderBy('weight', $sortDirection);
+        }
+
+        $packets = $query->paginate(10, ['*'], 'page', $page);
+
+        $packets->appends([
+            'format' => $format,
+            'sortByDate' => $sortByDate,
+            'sortDirection' => $sortDirection,
+        ]);
+
         return view('packetList', [
             'packets' => $packets,
+            'selectedFormat' => $format,
+            'sortByDate' => $sortByDate,
+            'sortDirection' => $sortDirection,
         ]);
     }
 

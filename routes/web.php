@@ -28,6 +28,10 @@ Route::get('/create-package', function () {
 
 Route::get('/packets', [App\Http\Controllers\PacketController::class, 'index'])->middleware('auth')->name('user-packets-list');
 
+Route::get('/packets/{format?}', [App\Http\Controllers\PacketController::class, 'index'])
+    ->where('format', '(letter|parcel)?')
+    ->name('packets.index');
+
 Route::get('/create-label/{id}', [App\Http\Controllers\PacketController::class, 'createLabel'])->middleware('auth')->name('createLabel');
 
 Route::get('/labels', [App\Http\Controllers\PacketController::class, 'createLabels'])->middleware('auth')->name('createLabels');
