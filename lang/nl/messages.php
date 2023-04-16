@@ -36,5 +36,5 @@ return [
     'weight_desc' => 'Gewicht aflopend',
     'no_weight' => 'Geen gewicht filter',
     'deliverer' => 'Bezorger',
-
+    'search' => 'Zoeken',
 ];
