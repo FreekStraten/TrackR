@@ -28,4 +28,9 @@ class Packet extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function deliveryDriver()
+    {
+        return $this->belongsTo(DeliveryDriver::class);
+    }
 }
