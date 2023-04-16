@@ -31,13 +31,6 @@ class PacketController extends Controller
 
         //search the packets by the search term using Full Text Search on the key name is fulltext_i_delivery
         if (!empty($searchTerm)) {
-
-
-
-
-
-
-
             $fixedSearchTerm = $searchTerm . '*';
             $query = $query->whereRaw("(MATCH(delivery_street, delivery_house_number, delivery_city, delivery_zip_code) AGAINST(? IN BOOLEAN MODE)
                                 OR MATCH(shipping_street, shipping_house_number, shipping_city, shipping_zip_code) AGAINST(? IN BOOLEAN MODE))", [$fixedSearchTerm, $fixedSearchTerm]);
