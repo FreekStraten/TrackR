@@ -36,4 +36,5 @@ return [
     'weight_desc' => 'Weight descending',
     'no_weight' => 'No weight filter',
     'deliverer' => 'Deliverer',
+    'search' => 'Search',
 ];

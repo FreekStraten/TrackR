@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-2.5 flex justify-between items-center">
 
-                <div class="w-2/3 ml-2 flex">
+                <div class="w-4/5 ml-2 flex">
                     <form action="{{ route('user-packets-list') }}" method="GET" class="w-full mx-2 flex">
 
                         <input type="hidden" name="page" value="{{ $packets->currentPage() }}">
@@ -35,10 +35,12 @@
                             <option value="desc"{{ $sortDirection === 'desc' ? ' selected' : '' }}> {{__('messages.weight_desc') }}</option>
                         </select>
 
+                        <input type="hidden" name="page" value="{{ $packets->currentPage() }}">
+                        <input value="{{ $searchTerm }}" type="text" name="search" class="form-control mr-2" placeholder="{{ __('messages.search') }}" onkeydown="if (event.keyCode === 13) this.form.submit();">
                     </form>
                 </div>
 
-                <div class="w-2/3 text-right mr-2">
+                <div class="text-right mr-2">
                     <a href="{{ route('createLabels') }}"
                        class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-md shadow-md no-underline">{{ __('messages.bulk_pdf') }}</a>
                 </div>
