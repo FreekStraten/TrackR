@@ -64,8 +64,8 @@ Route::get('locale/{locale}', function ($locale) {
 
 require __DIR__ . '/auth.php';
 
-//create a route to packetLabel.blade.php
 Route::get('/packetLabel/{id}', [App\Http\Controllers\PacketController::class, 'packetLabel'])->middleware('auth')->name('packetLabel');
 
-//create a route to packetLabels function
 Route::get('/packetLabels', [App\Http\Controllers\PacketController::class, 'packetLabels'])->middleware('auth')->name('packetLabels');
+
+Route::post('/saveDriver', [App\Http\Controllers\PacketController::class, 'saveDriver'])->middleware('auth')->name('saveDriver');

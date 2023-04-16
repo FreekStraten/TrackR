@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeliveryDriver;
 use App\Models\Packet;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
@@ -44,7 +45,10 @@ class PacketController extends Controller
             'sortDirection' => $sortDirection,
         ]);
 
+        $delivery_drivers = DeliveryDriver::all();
+
         return view('packetList', [
+            'delivery_drivers' => $delivery_drivers, // add this line to pass the variable to the view
             'packets' => $packets,
             'selectedFormat' => $format,
             'sortByDate' => $sortByDate,
@@ -101,7 +105,6 @@ class PacketController extends Controller
     }
 
 
-
     public function uploadCsv(Request $request)
     {
         $file = $request->file('csv_file');
@@ -153,8 +156,8 @@ class PacketController extends Controller
         return view('packetLabels', compact('packets'));
     }
 
-
-    public function createLabels() {
+    public function createLabels()
+    {
         $user = auth()->user(); // Get the authenticated user
         $packets = $user->packets; // Get all packets associated with the user
         $pdf = app('dompdf.wrapper')->loadView('packetLabels', compact('packets'));
@@ -169,4 +172,25 @@ class PacketController extends Controller
         $pdf = app('dompdf.wrapper')->loadView('packetLabel', compact('packet'));
         return $pdf->download('packetLabel.pdf');
     }
+
+    //add delivery driver to the database
+    public function saveDriver()
+    {
+        $id = request('id');
+        $deliveryDriver = request('delivery_driver');
+        $packet = Packet::find($id);
+
+        $driverExists = DeliveryDriver::where('name', $deliveryDriver)->exists();
+
+        if ($driverExists) {
+            $packet->delivery_driver = $deliveryDriver;
+        } else {
+            $packet->delivery_driver = null;
+        }
+
+        $packet->save();
+        return redirect()->back()->with('success', 'Delivery driver added successfully.');
+    }
+
+
 }

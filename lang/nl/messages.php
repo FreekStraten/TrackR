@@ -34,6 +34,7 @@ return [
     'no_date' => 'Geen datum filter',
     'weight_asc' => 'Gewicht oplopend',
     'weight_desc' => 'Gewicht aflopend',
-    'no_weight' => 'Geen gewicht filter'
+    'no_weight' => 'Geen gewicht filter',
+    'deliverer' => 'Bezorger',
 
 ];
