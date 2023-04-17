@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 
 class PacketController extends Controller
 {
+
     public function index(Request $request)
     {
         $user = auth()->user();
@@ -23,7 +24,18 @@ class PacketController extends Controller
         $sortDirection = $request->input('sortDirection');
         $page = $request->input('page', 1);
 
+
+        $searchTerm = $request->input('search');
+
         $query = $user->packets();
+
+        //search the packets by the search term using Full Text Search on the key name is fulltext_i_delivery
+        if (!empty($searchTerm)) {
+            $fixedSearchTerm = $searchTerm . '*';
+            $query = $query->whereRaw("(MATCH(delivery_street, delivery_house_number, delivery_city, delivery_zip_code) AGAINST(? IN BOOLEAN MODE)
+                                OR MATCH(shipping_street, shipping_house_number, shipping_city, shipping_zip_code) AGAINST(? IN BOOLEAN MODE))", [$fixedSearchTerm, $fixedSearchTerm]);
+        }
+
 
         if (!empty($format)) {
             $query = $query->where('format', $format);
@@ -43,16 +55,18 @@ class PacketController extends Controller
             'format' => $format,
             'sortByDate' => $sortByDate,
             'sortDirection' => $sortDirection,
+            'search' => $searchTerm,
         ]);
 
         $delivery_drivers = DeliveryDriver::all();
 
         return view('packetList', [
-            'delivery_drivers' => $delivery_drivers, // add this line to pass the variable to the view
+            'delivery_drivers' => $delivery_drivers,
             'packets' => $packets,
             'selectedFormat' => $format,
             'sortByDate' => $sortByDate,
             'sortDirection' => $sortDirection,
+            'searchTerm' => $searchTerm,
         ]);
     }
 
