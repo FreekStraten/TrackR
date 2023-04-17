@@ -37,4 +37,8 @@ return [
     'no_weight' => 'Geen gewicht filter',
     'deliverer' => 'Bezorger',
     'search' => 'Zoeken',
+    'unchosendriver' => 'Niet gekozen bezorger',
+    'createpickupaction' => 'Maak een ophaalactie',
+    'details' => 'Details',
+
 ];

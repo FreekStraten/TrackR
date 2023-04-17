@@ -23,6 +23,11 @@ return new class extends Migration
             $table->foreignId('package_id')->constrained('packets')->onDelete('cascade');
 
         });
+
+        // alter the packets table to add the foreign key to the pick up table
+        Schema::table('packets', function (Blueprint $table) {
+            $table->foreignId('pick_up_id')->nullable()->constrained('pick_ups')->onDelete('cascade');
+        });
     }
 
     /**
@@ -30,6 +35,19 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (Schema::hasColumn('packets', 'pick_up_id')) {
+            Schema::table('packets', function (Blueprint $table) {
+                $table->dropForeign(['pick_up_id']);
+                $table->dropColumn('pick_up_id');
+            });
+        }
         Schema::dropIfExists('pick_ups');
+
+
+
+
+
+
+
     }
 };

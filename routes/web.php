@@ -60,6 +60,15 @@ Route::post('/admin/store', [\App\Http\Controllers\AdminController::class, 'stor
 Route::post('/admin/destroy', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.destroy')->middleware('auth');
 
 
+// pickups
+Route::get('/pickups', [\App\Http\Controllers\PickupsController::class, 'index'])->name('pickups.index')->middleware('auth');
+Route::get('/pickups/planned', [\App\Http\Controllers\PickupsController::class, 'planned'])->name('pickups.planned')->middleware('auth');
+Route::get('/pickups/create/{id}', [\App\Http\Controllers\PickupsController::class, 'create'])->name('pickups.create')->middleware('auth');
+Route::post('/pickups/store', [\App\Http\Controllers\PickupsController::class, 'store'])->name('pickups.store')->middleware('auth');
+Route::get('/pickups/show/{id}', [\App\Http\Controllers\PickupsController::class, 'show'])->name('pickups.show')->middleware('auth');
+
+
+
 Route::get('locale/{locale}', function ($locale) {
     App::setLocale($locale);
     session()->put('locale', $locale);

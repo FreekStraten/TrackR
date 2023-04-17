@@ -6,4 +6,5 @@ return [
     'english' => 'Engels',
     'dutch' => 'Nederlands',
     'admin' => 'Admin',
+    'pickups_list' => 'Ophaallijst',
 ];
