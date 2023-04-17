@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('homepage');
+})->name('homepage');
+
 Route::post('/store-package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
 
 Route::middleware('api')->post('/api/packages', [App\Http\Controllers\PacketController::class, 'store']);
