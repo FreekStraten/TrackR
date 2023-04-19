@@ -11,36 +11,36 @@ class PickupsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($planned = false)
+    public function index()
     {
-        // Get all packets that have not had a pick up planned yet
-        // if planned is true, only get ones that have been planned
-        if ($planned) {
-            $packetswithoutpickups = Packet::whereNotNull('pick_up_id')->get();
-        } else {
-            $packetswithoutpickups = Packet::whereNull('pick_up_id')->get();
+        $pickups = Pickup::get();
+
+        // for each pickup, get the packets that are linked to it
+        foreach($pickups as $pickup) {
+            $pickup->packets = Packet::where('pick_up_id', $pickup->id)->get();
         }
 
-
-        return view('pickups.index', ['packets' => $packetswithoutpickups], ['planned' => $planned]);
+        return view('pickups.index', ['pickups' => $pickups]);
     }
 
-    public function planned()
-    {
-        $packetswithoutpickups = Pickup::get();
-
-        return view('pickups.plannedpickups', ['packets' => $packetswithoutpickups], ['planned' => true]);
-
-    }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $id)
+    public function create(Request $request)
     {
-        // Get the packet with the given id
-        $packet = Packet::find($id);
-        return view('pickups.create', ['packet' => $packet]);
+        // get all the packets using the id's that are included in the checkbox[] in request
+        $packets = [];
+        foreach($request->pickupsids as $id) {
+            // if it exists
+            if (Packet::find($id)) {
+                // add it to the array
+                $packets[] = Packet::find($id);
+            }
+        }
+
+
+        return view('pickups.create', ['packets' => $packets, 'packetids' => $request->pickupsids]);
     }
 
 
@@ -49,7 +49,8 @@ class PickupsController extends Controller
      */
     public function store(Request $request)
     {
-        // valdidate the pickup data, Everything is required, Date should be before today and time before 15:00
+
+        // valdidate the pickup data, Everything is required, Date should be after today and time before 15:00
         $request->validate([
             'date' => 'required|date|after:tomorrow',
             'time' => 'required|date_format:H:i|before:15:00',
@@ -66,19 +67,23 @@ class PickupsController extends Controller
             'pickup_house_number' => $request->pickup_house_number,
             'pickup_city' => $request->pickup_city,
             'pickup_zip_code' => $request->pickup_zip_code,
-            'package_id' => $request->packet_id,
         ]);
-
 
 
         $pickup->save();
 
-        // Get the packet with the given id
-        $packet = Packet::find($request->packet_id);
 
-        // Set the pickup id of the packet to the id of the pickup
-        $packet->pick_up_id = $pickup->id;
-        $packet->save();
+        foreach($request->packetids as $id) {
+            // if it exists
+            if (Packet::find($id)) {
+                // add the pickup id to the packet
+                $packet = Packet::find($id);
+                $packet->pick_up_id = $pickup->id;
+                $packet->save();
+            }
+        }
+
+
 
         return redirect()->route('pickups.index');
     }

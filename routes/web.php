@@ -62,8 +62,7 @@ Route::post('/admin/destroy', [\App\Http\Controllers\AdminController::class, 'de
 
 // pickups
 Route::get('/pickups', [\App\Http\Controllers\PickupsController::class, 'index'])->name('pickups.index')->middleware('auth');
-Route::get('/pickups/planned', [\App\Http\Controllers\PickupsController::class, 'planned'])->name('pickups.planned')->middleware('auth');
-Route::get('/pickups/create/{id}', [\App\Http\Controllers\PickupsController::class, 'create'])->name('pickups.create')->middleware('auth');
+Route::get('/pickups/create', [\App\Http\Controllers\PickupsController::class, 'create'])->name('pickups.create')->middleware('auth');
 Route::post('/pickups/store', [\App\Http\Controllers\PickupsController::class, 'store'])->name('pickups.store')->middleware('auth');
 Route::get('/pickups/show/{id}', [\App\Http\Controllers\PickupsController::class, 'show'])->name('pickups.show')->middleware('auth');
 

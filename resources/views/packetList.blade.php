@@ -48,64 +48,108 @@
         </div>
     </div>
 
+    <form action="{{ route('pickups.create') }}" method="GET" >
+        @csrf
+        <button type="submit"  class="btn btn-primary sticky-top m-2 btn-lg">{{ __('pickups.plan_pickup') }}</button>
+        <div class="pt-1 pb-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="p-6">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>{{__('pickups.plan_pickup')}}</th>
+                                <th class="w-32">{{ __('messages.date') }}</th>
+                                <th class="">{{ __('messages.tracking_number') }}</th>
+                                <th>{{ __('messages.format') }}</th>
+                                <th>{{ __('messages.short_weight') }}</th>
+                                <th>{{ __('messages.shipping_address') }}</th>
+                                <th>{{ __('messages.delivery_address') }}</th>
+                                <th class="w-32">{{ __('messages.deliverer') }}</th>
+                                <th>{{ __('messages.actions') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if(isset($packets))
+                                @foreach($packets as $packet)
+                                    <tr class="align-middle">
 
-    <div class="pt-1 pb-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th class="w-32">{{ __('messages.date') }}</th>
-                            <th class="">{{ __('messages.tracking_number') }}</th>
-                            <th>{{ __('messages.format') }}</th>
-                            <th>{{ __('messages.short_weight') }}</th>
-                            <th>{{ __('messages.shipping_address') }}</th>
-                            <th>{{ __('messages.delivery_address') }}</th>
-                            <th class="w-32">{{ __('messages.deliverer') }}</th>
-                            <th>{{ __('messages.actions') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if(isset($packets))
-                            @foreach($packets as $packet)
-                                <tr class="align-middle">
-                                    <td>{{ $packet->date }}</td>
-                                    <td>{{ $packet->tracking_number }}</td>
-                                    <td>{{ $packet->format }}</td>
-                                    <td>{{ $packet->weight }}</td>
-                                    <td>{{ $packet->shipping_street }}, {{ $packet->shipping_house_number }}
-                                        , {{ $packet->shipping_zip_code }} {{ $packet->shipping_city }}</td>
-                                    <td>{{ $packet->delivery_street }}, {{ $packet->delivery_house_number }}
-                                        , {{ $packet->delivery_zip_code }} {{ $packet->delivery_city }}</td>
-                                    <td>
-                                        <form action="{{ route('saveDriver') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $packet->id }}">
-                                            <select name="delivery_driver" id="driver" class="form-control mr-2" onchange="this.form.submit()">
-                                                <option value="">-</option>
-                                                @foreach($delivery_drivers as $driver)
-                                                    <option value="{{ $driver->name }}"{{ $driver->name == $packet->delivery_driver ? ' selected' : '' }}>{{ $driver->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('createLabel', ['id' => $packet->id]) }}"
-                                           class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded-md shadow-md no-underline">PDF</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
-                        </tbody>
-                    </table>
-                </div>
-                <div class="pb-6 mx-4">
-                    <div class="align-middle">
-                        {{ $packets->links() }}
+                                        @if($packet->pickup)
+                                            <td>{{__('pickups.planned')}} {{ $packet->pickup->pick_up_date_time }}</td>
+                                        @else
+                                            <td>
+                                                <input type="checkbox" name="pickupsids[]" value="{{ $packet->id }}">
+                                            </td>
+                                        @endif
+                                        <td>{{ $packet->date }}</td>
+                                        <td>{{ $packet->tracking_number }}</td>
+                                        <td>{{ $packet->format }}</td>
+                                        <td>{{ $packet->weight }}</td>
+                                        <td>{{ $packet->shipping_street }}, {{ $packet->shipping_house_number }}
+                                            , {{ $packet->shipping_zip_code }} {{ $packet->shipping_city }}</td>
+                                        <td>{{ $packet->delivery_street }}, {{ $packet->delivery_house_number }}
+                                            , {{ $packet->delivery_zip_code }} {{ $packet->delivery_city }}</td>
+                                        <td>
+                                            <form action="{{ route('saveDriver') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{ $packet->id }}">
+                                                <select name="delivery_driver" id="driver" class="form-control mr-2" onchange="this.form.submit()">
+                                                    <option value="">-</option>
+                                                    @foreach($delivery_drivers as $driver)
+                                                        <option value="{{ $driver->name }}"{{ $driver->name == $packet->delivery_driver ? ' selected' : '' }}>{{ $driver->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('createLabel', ['id' => $packet->id]) }}"
+                                               class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded-md shadow-md no-underline">PDF</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pb-6 mx-4">
+                        <div class="align-middle">
+                            {{ $packets->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </form>
+
 </x-app-layout>
+
+<script>
+
+
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                showCreatePickupButton();
+            });
+        });
+    showCreatePickupButton();
+
+    function showCreatePickupButton() {
+        let createPickupButton = document.querySelector('button[type="submit"]');
+
+        let checked = false;
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                checked = true;
+            }
+        });
+
+        if (checked) {
+            createPickupButton.style.display = 'block';
+        } else {
+            createPickupButton.style.display = 'none';
+        }
+    }
+</script>

@@ -40,4 +40,5 @@ return [
     'unchosendriver' => 'Unchosen driver',
     'createpickupaction' => 'Create a pickup action',
     'details' => 'Details',
+    'packets' => 'Packages',
 ];

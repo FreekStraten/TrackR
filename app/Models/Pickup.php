@@ -18,13 +18,13 @@ class Pickup extends Model
         'pickup_house_number',
         'pickup_city',
         'pickup_zip_code',
-        'package_id',
     ];
 
-    public function package()
+    public function packets()
     {
-        return $this->belongsTo(Packet::class);
+        return $this->hasMany(Packet::class);
     }
+
 
 
 }

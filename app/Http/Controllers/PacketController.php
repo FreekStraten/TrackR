@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DeliveryDriver;
 use App\Models\Packet;
+use App\Models\Pickup;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +37,11 @@ class PacketController extends Controller
                                 OR MATCH(shipping_street, shipping_house_number, shipping_city, shipping_zip_code) AGAINST(? IN BOOLEAN MODE))", [$fixedSearchTerm, $fixedSearchTerm]);
         }
 
+        $pickupspecification = $request->input('pickup_id');
+        if (!empty($pickupspecification)) {
+            $query = $query->where('pick_up_id', $pickupspecification);
+        }
+
 
         if (!empty($format)) {
             $query = $query->where('format', $format);
@@ -59,6 +65,14 @@ class PacketController extends Controller
         ]);
 
         $delivery_drivers = DeliveryDriver::all();
+
+        // for each packet in the list, get the pickup if it exists
+        foreach ($packets as $packet) {
+            if ($packet->pick_up_id) {
+                // get the pickup
+                $packet->pickup = Pickup::find($packet->pick_up_id);
+            }
+        }
 
         return view('packetList', [
             'delivery_drivers' => $delivery_drivers,

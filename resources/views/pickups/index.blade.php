@@ -12,19 +12,12 @@
                 <div class="w-4/5 ml-2 flex">
                     <form action="{{ route('user-packets-list') }}" method="GET" class="w-full mx-2 flex">
 
-{{--                        <input type="hidden" name="page" value="{{ $packets->currentPage() }}">--}}
+                        {{--                        <input type="hidden" name="page" value="{{ $packets->currentPage() }}">--}}
 
                     </form>
                 </div>
 
                 <div class="w-4/5 ml-2 flex">
-                    <!-- button Switch between already planned and unplanned -->
-                    <form action="{{ route('pickups.planned') }}" method="GET" class="w-full mx-2 flex">
-                        <input type="hidden" name="planned" value="{{ $planned }}">
-                        <button type="submit"
-                                class="bg-blue-600 hover:bg-blue-800 text-black font-bold py-2 px-3 rounded-md shadow-md no-underline">{{ __('pickups.switch_planned') }}</button>
-                    </form>
-
 
 
                 </div>
@@ -46,42 +39,25 @@
                         <thead>
                         <tr>
                             <th class="w-32">{{ __('messages.date') }}</th>
-                            <th class="">{{ __('messages.tracking_number') }}</th>
-                            <th>{{ __('messages.format') }}</th>
-                            <th>{{ __('messages.short_weight') }}</th>
-                            <th>{{ __('messages.shipping_address') }}</th>
-                            <th>{{ __('messages.delivery_address') }}</th>
-                            <th class="w-32">{{ __('messages.deliverer') }}</th>
-                            <th>{{ __('messages.createpickupaction') }}</th>
+                            <th>{{ __('pickups.pickup_location') }}</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if(isset($packets))
-                            @foreach($packets as $packet)
+                        @if(isset($pickups))
+                            @foreach($pickups as $pickup)
                                 <tr class="align-middle">
-                                    <td>{{ $packet->date }}</td>
-                                    <td>{{ $packet->tracking_number }}</td>
-                                    <td>{{ $packet->format }}</td>
-                                    <td>{{ $packet->weight }}</td>
-                                    <td>{{ $packet->shipping_street }}, {{ $packet->shipping_house_number }}
-                                        , {{ $packet->shipping_zip_code }} {{ $packet->shipping_city }}</td>
-                                    <td>{{ $packet->delivery_street }}, {{ $packet->delivery_house_number }}
-                                        , {{ $packet->delivery_zip_code }} {{ $packet->delivery_city }}</td>
-                                    <td>
+                                    <td class="">{{ $pickup->pick_up_date_time }}</td>
+                                    <td>{{ $pickup->pickup_street }}, {{ $pickup->pickup_house_number }}
+                                        , {{ $pickup->pickup_zip_code }} {{ $pickup->pickup_city }}</td>
 
-                                        <!-- if the delivery is null, it is 'unchosendriver' otherwise show it -->
-                                        @if($packet->delivery_id == null)
-                                            {{ __('messages.unchosendriver') }}
-                                        @else
-                                            {{ $packet->delivery->name }}
-                                        @endif
-
-                                    </td>
                                     <td>
-                                        <a href="{{ route('pickups.create', ['id' => $packet->id]) }}"
-                                           class="btn btn-bg btn-primary">{{__('pickups.plan')}}</a>
+                                        <a href="{{ route('user-packets-list', ['pickup_id' => $pickup->id]) }}"
+                                           class="btn btn-primary">{{ __('messages.packets') }}: {{ $pickup->packets->count() }}</a>
                                     </td>
                                 </tr>
+
+
                             @endforeach
                         @endif
                         </tbody>
@@ -89,13 +65,11 @@
                 </div>
                 <div class="pb-6 mx-4">
                     <div class="align-middle">
-{{--                        {{ $packets->links() }}--}}
+                        {{--                        {{ $packets->links() }}--}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 </x-app-layout>

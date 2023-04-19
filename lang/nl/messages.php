@@ -40,5 +40,6 @@ return [
     'unchosendriver' => 'Niet gekozen bezorger',
     'createpickupaction' => 'Maak een ophaalactie',
     'details' => 'Details',
+    'packets' => 'Pakketten',
 
 ];

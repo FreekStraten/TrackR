@@ -14,14 +14,12 @@ return new class extends Migration
         Schema::create('pick_ups', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            // date and time of pick up, address of pick up and the package to be picked up (foreign key)
+            // date and time of pick up, address of pick up location. one pickup can have many packets
             $table->dateTime('pick_up_date_time');
             $table->string('pickup_street');
             $table->string('pickup_house_number');
             $table->string('pickup_city');
             $table->string('pickup_zip_code');
-            $table->foreignId('package_id')->constrained('packets')->onDelete('cascade');
-
         });
 
         // alter the packets table to add the foreign key to the pick up table
