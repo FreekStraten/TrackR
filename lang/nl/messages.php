@@ -42,5 +42,5 @@ return [
     'details' => 'Details',
     'packets' => 'Pakketten',
     'status' => 'Status',
-
+    'qr' => 'QR',
 ];

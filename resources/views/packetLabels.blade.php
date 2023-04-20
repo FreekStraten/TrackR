@@ -34,6 +34,7 @@
 
         <br>
         <div class="footer">
+            {!! $qrCodes !!}
             <p>{{ __('messages.generated_by_trackr') }}</p>
         </div>
     </div>

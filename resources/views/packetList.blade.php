@@ -4,10 +4,11 @@
             {{ __('messages.my_packets') }}
         </h3>
 
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+{{--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">--}}
     </x-slot>
 
     <div class="pt-10">
@@ -77,6 +78,7 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th>{{ __('messages.qr') }}</th>
                                 <th class="hidden"></th>
                                 <th class="w-32">{{ __('messages.date') }}</th>
                                 <th class="">{{ __('messages.tracking_number') }}</th>
@@ -92,6 +94,7 @@
                             @if(isset($packets))
                                 @foreach($packets as $packet)
                                     <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleRowSelection(this)">
+                                        <td><a  href="{{ route('showQR', ['id' => $packet->id]) }}" class="fa fa-qrcode no-underline text-black" style="font-size:24px"></a></td>
                                         <td class="hidden" id="{{ $packet->id }}"></td>
                                         <td>{{ $packet->date }}</td>
                                         <td>{{ $packet->tracking_number }}</td>
@@ -135,6 +138,7 @@
         </div>
     </form>
 </x-app-layout>
+
 
 <script>
 
@@ -184,3 +188,4 @@
 
     }
 </script>
+

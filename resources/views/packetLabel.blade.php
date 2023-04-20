@@ -31,6 +31,14 @@
 
 <br>
 <div class="footer">
+
+    <!-- if qr code is null -->
+    @if($qrCode == null)
+        <p>QR Code is null</p>
+    @endif
+    {!! $qrCode !!}
+
+
     <p>{{ __('messages.generated_by_trackr') }}</p>
 </div>
 </body>

@@ -54,7 +54,8 @@ Route::get('/packetLabel/{id}', [App\Http\Controllers\PacketController::class, '
 Route::get('/packetLabels', [App\Http\Controllers\PacketController::class, 'packetLabels'])->name('packetLabels')->middleware('auth');
 
 
-
+//route get QR
+Route::get('/showQR/{id}', [App\Http\Controllers\PacketController::class, 'showQR'])->middleware('auth')->name('showQR');
 
 
 
@@ -81,3 +82,4 @@ Route::get('locale/{locale}', function ($locale) {
 })->name('locale');
 
 require __DIR__ . '/auth.php';
+

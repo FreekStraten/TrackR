@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\DeliveryDriver;
 use App\Models\Packet;
 use App\Models\Pickup;
+use Barryvdh\DomPDF\PDF;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PacketController extends Controller
 {
@@ -20,17 +21,20 @@ class PacketController extends Controller
     {
         $user = auth()->user();
 
-
-
         $format = $request->input('format');
         $sortByDate = $request->input('sortByDate');
         $sortDirection = $request->input('sortDirection');
         $page = $request->input('page', 1);
 
-
         $searchTerm = $request->input('search');
 
         $query = $user->packets();
+
+        //create a QR code for each packet
+        $packets = $query->get();
+        foreach ($packets as $packet) {
+            $packet->qr_code = QrCode::size(200)->generate($packet->tracking_number);
+        }
 
         //search the packets by the search term using Full Text Search on the key name is fulltext_i_delivery
         if (!empty($searchTerm)) {
@@ -43,7 +47,6 @@ class PacketController extends Controller
         if (!empty($pickupspecification)) {
             $query = $query->where('pick_up_id', $pickupspecification);
         }
-
 
         if (!empty($format)) {
             $query = $query->where('format', $format);
@@ -170,22 +173,6 @@ class PacketController extends Controller
         return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
 
-    //METHOD JUST FOR TESTING
-    public function packetLabel($id)
-    {
-        $packet = Packet::find($id);
-        return view('packetLabel', compact('packet'));
-    }
-
-    //create a pdf packet label for all packets of the user
-    //METHOD JUST FOR TESTING
-    public function packetLabels()
-    {
-        $user = auth()->user(); // Get the authenticated user
-        $packets = $user->packets; // Get all packets associated with the user
-        return view('packetLabels', compact('packets'));
-    }
-
     public function createLabels()
     {
         $user = auth()->user(); // Get the authenticated user
@@ -223,4 +210,35 @@ class PacketController extends Controller
     }
 
 
+    ///////******** THE FOLLOWING METHODS ARE JUST FOR TESTING ********//////
+
+    //JUST FOR TESTING
+    public function showQR($id)
+    {
+        $packet = Packet::find($id);
+        $qrCode = QrCode::size(250)->generate($packet->tracking_number);
+
+        return view('QRcode', compact('packet', 'qrCode'));
+    }
+
+    //METHOD JUST FOR TESTING
+    public function packetLabels()
+    {
+        $user = auth()->user(); // Get the authenticated user
+        $packets = $user->packets; // Get all packets associated with the user
+
+        return view('packetLabels', compact('packets'));
+    }
+
+    //METHOD JUST FOR TESTING
+    public function packetLabel($id)
+    {
+        $packet = Packet::find($id);
+
+        //add qr code for a png image
+        $qrCode = QrCode::size(250)->generate($packet->tracking_number);
+
+
+        return view('packetLabel', compact('packet', 'qrCode'));
+    }
 }
