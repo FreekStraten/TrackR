@@ -156,11 +156,10 @@
             .then(response => {
                 // Handle the response from the server
                 console.log(response);
+
+                //redirect
+                window.location.href = response.url;
             })
-            .catch(error => {
-                // Handle any errors that occurred during the request
-                console.error(error);
-            });
 
     });
 
