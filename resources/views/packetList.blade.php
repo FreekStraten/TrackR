@@ -57,8 +57,7 @@
                 </div>
 
                 <div class="text-right">
-
-                    <a class="pickup-button invisible bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-md shadow-md no-underline">{{ __('pickups.plan_pickup') }}</a>
+                    <a href="" class="pickup-button invisible bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-md shadow-md no-underline">{{ __('pickups.plan_pickup') }}</a>
                 </div>
 
                 <div class="text-right mr-2">

@@ -1,42 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h3 class="font-semibold text-gray-800 leading-tight">
             {{ __('pickups.pickups') }}
-        </h2>
+        </h3>
     </x-slot>
 
-    <div class="pt-10">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-2.5 flex justify-between items-center">
-
-                <div class="w-4/5 ml-2 flex">
-                    <form action="{{ route('user-packets-list') }}" method="GET" class="w-full mx-2 flex">
-                    </form>
-                </div>
-
-                <div class="w-4/5 ml-2 flex">
-
-                </div>
-
-                <div class="text-right mr-2">
-                    <a href="{{ route('createLabels') }}"
-                       class="bg-blue-600 hover:bg-blue-800 text-black font-bold py-2 px-3 rounded-md shadow-md no-underline">{{ __('messages.bulk_pdf') }}</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="pt-1 pb-12">
+    <div class="pt-10 pb-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th class="w-32">{{ __('messages.date') }}</th>
+                            <th>{{ __('messages.date') }}</th>
                             <th>{{ __('pickups.pickup_location') }}</th>
-                            <th></th>
+                            <th>{{ __('messages.actions') }}</th>
                         </tr>
                         </thead>
                         <tbody>
