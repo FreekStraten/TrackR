@@ -3,6 +3,8 @@
         <h3 class="font-semibold text-gray-800 leading-tight">
             {{ __('messages.my_packets') }}
         </h3>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </x-slot>
 
     <div class="pt-10">
@@ -58,7 +60,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>{{__('pickups.plan_pickup')}}</th>
+
                                 <th class="w-32">{{ __('messages.date') }}</th>
                                 <th class="">{{ __('messages.tracking_number') }}</th>
                                 <th>{{ __('messages.format') }}</th>
@@ -66,21 +68,14 @@
                                 <th>{{ __('messages.shipping_address') }}</th>
                                 <th>{{ __('messages.delivery_address') }}</th>
                                 <th class="w-32">{{ __('messages.deliverer') }}</th>
-                                <th>{{ __('messages.actions') }}</th>
+                                <th><i class="fa fa-file-pdf-o" aria-hidden="true"></i></th>
+                                <th><i class="fa fa-truck" aria-hidden="true"></i></th>
                             </tr>
                             </thead>
                             <tbody>
                             @if(isset($packets))
                                 @foreach($packets as $packet)
                                     <tr class="align-middle">
-
-                                        @if($packet->pickup)
-                                            <td>{{__('pickups.planned')}} {{ $packet->pickup->pick_up_date_time }}</td>
-                                        @else
-                                            <td>
-                                                <input type="checkbox" name="pickupsids[]" value="{{ $packet->id }}">
-                                            </td>
-                                        @endif
                                         <td>{{ $packet->date }}</td>
                                         <td>{{ $packet->tracking_number }}</td>
                                         <td>{{ $packet->format }}</td>
@@ -105,6 +100,16 @@
                                             <a href="{{ route('createLabel', ['id' => $packet->id]) }}"
                                                class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-2 rounded-md shadow-md no-underline">PDF</a>
                                         </td>
+
+                                        @if($packet->pickup)
+                                            <td>{{__('pickups.planned')}} {{ $packet->pickup->pick_up_date_time }}</td>
+                                        @else
+                                            <td>
+                                                <label class="inline-flex items-center">
+                                                    <input type="checkbox" name="pickupsids[]" value="{{ $packet->id }}" class="form-checkbox h-5 w-5 text-green-500 rounded-md shadow-md py-1 px-2">
+                                                </label>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             @endif

@@ -11,9 +11,6 @@
 
                 <div class="w-4/5 ml-2 flex">
                     <form action="{{ route('user-packets-list') }}" method="GET" class="w-full mx-2 flex">
-
-                        {{--                        <input type="hidden" name="page" value="{{ $packets->currentPage() }}">--}}
-
                     </form>
                 </div>
 
