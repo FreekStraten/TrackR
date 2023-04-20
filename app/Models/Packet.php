@@ -33,4 +33,9 @@ class Packet extends Model
     {
         return $this->belongsTo(DeliveryDriver::class);
     }
+
+    public function pickup()
+    {
+        return $this->belongsTo(Pickup::class);
+    }
 }

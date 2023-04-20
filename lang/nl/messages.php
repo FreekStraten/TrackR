@@ -23,7 +23,7 @@ return [
     'upload_csv' => 'Upload CSV Pakketten',
     'forum' => 'Forum',
     'add_csv' => 'Voeg CSV toe',
-    'actions' => "Actie",
+    'actions' => "Acties",
     'packet_label' => 'Pakket Label',
     'generated_by_trackr' => 'Gegenereerd door TrackR',
     'bulk_pdf' => 'Bulk PDF',
@@ -37,4 +37,9 @@ return [
     'no_weight' => 'Geen gewicht filter',
     'deliverer' => 'Bezorger',
     'search' => 'Zoeken',
+    'unchosendriver' => 'Niet gekozen bezorger',
+    'createpickupaction' => 'Maak een ophaalactie',
+    'details' => 'Details',
+    'packets' => 'Pakketten',
+
 ];

@@ -27,12 +27,18 @@
                         {{ __('messages.packets_list') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('pickups.index')" :active="request()->routeIs('pickups.index')">
+                        {{ __('nav.pickups_list') }}
+                    </x-nav-link>
+
 
 
                     @if(!is_null(Auth::user()) && Auth::user()->isSuperAdmin())
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
                         {{ __('index') }}
                     </x-nav-link>
+
+
                     @endif
 
 

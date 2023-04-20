@@ -16,11 +16,21 @@ class RoleSeeder extends Seeder
         // make two roles, one for admin and one for user
         $roles = [
             [
-                'name' => 'Super-admin',
+                'name' => 'Super-admin', // Is a role with read and write access to everything
+                'id' => 1,
             ],
             [
-                'name' => 'User',
+                'name' => 'User', // normal customer
+                'id' => 2,
             ],
+            [
+                'name' => 'Administator', // Is a role with read and write access to the packages
+                'id' => 3,
+            ],
+            [
+                'name' => 'PackagePacker', // Is a role with only read access to the packages
+                'id' => 4,
+            ]
         ];
 
         // insert the roles into the database

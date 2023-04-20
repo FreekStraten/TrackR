@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('homepage');
+})->name('homepage');
+
 Route::post('/store-package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
 
 Route::middleware('api')->post('/api/packages', [App\Http\Controllers\PacketController::class, 'store']);
@@ -54,6 +58,14 @@ Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->n
 Route::get('/admin/create', [\App\Http\Controllers\AdminController::class, 'create'])->name('admin.create')->middleware('auth');
 Route::post('/admin/store', [\App\Http\Controllers\AdminController::class, 'store'])->name('admin.store')->middleware('auth');
 Route::post('/admin/destroy', [\App\Http\Controllers\AdminController::class, 'destroy'])->name('admin.destroy')->middleware('auth');
+
+
+// pickups
+Route::get('/pickups', [\App\Http\Controllers\PickupsController::class, 'index'])->name('pickups.index')->middleware('auth');
+Route::get('/pickups/create', [\App\Http\Controllers\PickupsController::class, 'create'])->name('pickups.create')->middleware('auth');
+Route::post('/pickups/store', [\App\Http\Controllers\PickupsController::class, 'store'])->name('pickups.store')->middleware('auth');
+Route::get('/pickups/show/{id}', [\App\Http\Controllers\PickupsController::class, 'show'])->name('pickups.show')->middleware('auth');
+
 
 
 Route::get('locale/{locale}', function ($locale) {

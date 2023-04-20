@@ -37,4 +37,8 @@ return [
     'no_weight' => 'No weight filter',
     'deliverer' => 'Deliverer',
     'search' => 'Search',
+    'unchosendriver' => 'Unchosen driver',
+    'createpickupaction' => 'Create a pickup action',
+    'details' => 'Details',
+    'packets' => 'Packages',
 ];
