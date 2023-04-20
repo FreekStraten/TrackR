@@ -30,8 +30,10 @@ class PickupsController extends Controller
     public function create(Request $request)
     {
         // get all the packets using the id's that are included in the checkbox[] in request
+
+        $pickupsids = explode(',', $request->query('pickupsids'));
         $packets = [];
-        foreach($request->pickupsids as $id) {
+        foreach($pickupsids  as $id) {
             // if it exists
             if (Packet::find($id)) {
                 // add it to the array
@@ -39,8 +41,7 @@ class PickupsController extends Controller
             }
         }
 
-
-        return view('pickups.create', ['packets' => $packets, 'packetids' => $request->pickupsids]);
+        return view('pickups.create', ['packets' => $packets, 'packetids' => $pickupsids ]);
     }
 
 

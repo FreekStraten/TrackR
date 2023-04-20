@@ -16,7 +16,6 @@
 
                 <div class="w-4/5 ml-2 flex">
 
-
                 </div>
 
                 <div class="text-right mr-2">
@@ -44,7 +43,7 @@
                         @if(isset($pickups))
                             @foreach($pickups as $pickup)
                                 <tr class="align-middle">
-                                    <td class="">{{ $pickup->pick_up_date_time }}</td>
+                                    <td class=>{{ $pickup->pick_up_date_time }}</td>
                                     <td>{{ $pickup->pickup_street }}, {{ $pickup->pickup_house_number }}
                                         , {{ $pickup->pickup_zip_code }} {{ $pickup->pickup_city }}</td>
 

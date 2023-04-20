@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'plan_pickup' => 'Plan een ophaalmoment',
+    'plan_pickup' => 'Ophalen',
     'pickups' => 'Ophaalmomenten',
     'date' => 'Datum',
     'time' => 'Tijd',
