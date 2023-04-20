@@ -95,7 +95,7 @@
     <div class="pt-1 pb-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-2.5 flex justify-between items-center">
-                <table class="table table-striped m-6">
+                <table class="table m-6">
                     <thead>
                     <tr>
                         <th class="w-32">{{ __('messages.date') }}</th>
