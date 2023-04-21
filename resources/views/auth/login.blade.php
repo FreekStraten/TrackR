@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <!-- Session Status -->
+    <!-- Session PackageStatus -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
@@ -44,4 +44,11 @@
             </x-primary-button>
         </div>
     </form>
+
+    <div class="flex items-center justify-end mt-4">
+        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+            {{ __('Login.NoAccountRegister') }}
+        </a>
+    </div>
+
 </x-guest-layout>

@@ -19,6 +19,7 @@
                         {{ __('nav.homepage') }}
                     </x-nav-link>
 
+                    @if(!is_null(Auth::user()) && Auth::user()->isSuperAdmin() || Auth::user()->isUser())
                     <x-nav-link :href="route('create-package')" :active="request()->routeIs('create-package')">
                         {{ __('messages.create_packet') }}
                     </x-nav-link>
@@ -30,6 +31,14 @@
                     <x-nav-link :href="route('pickups.index')" :active="request()->routeIs('pickups.index')">
                         {{ __('nav.pickups_list') }}
                     </x-nav-link>
+                    @endif
+
+                    @if(!is_null(Auth::user()) && Auth::user()->isReciever())
+                    <x-nav-link :href="route('recievers.history')" :active="request()->routeIs('recievers.history')">
+                        {{ __('nav.recievershistory') }}
+                    </x-nav-link>
+                    @endif
+
 
 
 

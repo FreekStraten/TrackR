@@ -41,5 +41,6 @@ return [
     'createpickupaction' => 'Maak een ophaalactie',
     'details' => 'Details',
     'packets' => 'Pakketten',
+    'status' => 'Status',
 
 ];

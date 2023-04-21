@@ -32,6 +32,7 @@ class Packets extends Seeder
                 'delivery_zip_code' => '5678CD',
                 'user_id' => 2,
                 'delivery_driver' => null,
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 1, 1)->format('Y-m-d'),
@@ -48,6 +49,7 @@ class Packets extends Seeder
                 'delivery_zip_code' => '3456GH',
                 'user_id' => 2,
                 'delivery_driver' => null,
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 2, 14)->format('Y-m-d'),
@@ -64,6 +66,7 @@ class Packets extends Seeder
                 'delivery_zip_code' => '1234KL',
                 'user_id' => 2,
                 'delivery_driver' => null,
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 3, 17)->format('Y-m-d'),
@@ -79,7 +82,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Nijmegen',
                 'delivery_zip_code' => '9012OP',
                 'user_id' => 2,
-                'delivery_driver' => "UPS"
+                'delivery_driver' => "UPS",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 4, 1)->format('Y-m-d'),
@@ -95,7 +99,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Den Haag',
                 'delivery_zip_code' => '2511 CM',
                 'user_id' => 2,
-                'delivery_driver' => "DHL"
+                'delivery_driver' => "DHL",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 5, 5)->format('Y-m-d'),
@@ -111,7 +116,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Amersfoort',
                 'delivery_zip_code' => '3811 LA',
                 'user_id' => 2,
-                'delivery_driver' => "UPS"
+                'delivery_driver' => "UPS",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 6, 9)->format('Y-m-d'),
@@ -127,7 +133,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Eindhoven',
                 'delivery_zip_code' => '5611 KL',
                 'user_id' => 2,
-                'delivery_driver' => "DHL"
+                'delivery_driver' => "DHL",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 6, 21)->format('Y-m-d'),
@@ -143,7 +150,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Eindhoven',
                 'delivery_zip_code' => '5611 AZ',
                 'user_id' => 2,
-                'delivery_driver' => "PostNL"
+                'delivery_driver' => "PostNL",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 7, 4)->format('Y-m-d'),
@@ -159,7 +167,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Amersfoort',
                 'delivery_zip_code' => '6789RS',
                 'user_id' => 2,
-                'delivery_driver' => "UPS"
+                'delivery_driver' => "UPS",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 8, 12)->format('Y-m-d'),
@@ -175,7 +184,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Utrecht',
                 'delivery_zip_code' => '9012VW',
                 'user_id' => 2,
-                'delivery_driver' => "DHL"
+                'delivery_driver' => "DHL",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 10, 31)->format('Y-m-d'),
@@ -191,7 +201,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Haarlem',
                 'delivery_zip_code' => '5678ZA',
                 'user_id' => 2,
-                'delivery_driver' => "PostNL"
+                'delivery_driver' => "PostNL",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 12, 24)->format('Y-m-d'),
@@ -207,7 +218,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Deventer',
                 'delivery_zip_code' => '3456DE',
                 'user_id' => 2,
-                'delivery_driver' => "PostNL"
+                'delivery_driver' => "PostNL",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 12, 31)->format('Y-m-d'),
@@ -223,7 +235,8 @@ class Packets extends Seeder
                 'delivery_city' => 'Den Haag',
                 'delivery_zip_code' => '2511CD',
                 'user_id' => 2,
-                'delivery_driver' => "UPS"
+                'delivery_driver' => "UPS",
+                'package_status_id' => 1,
             ],
             [
                 'date' => Carbon::create(2023, 10, 31)->format('Y-m-d'),
@@ -239,7 +252,42 @@ class Packets extends Seeder
                 'delivery_city' => 'Brussel',
                 'delivery_zip_code' => '1000CD',
                 'user_id' => 2,
-                'delivery_driver' => "DHL"
+                'delivery_driver' => "DHL",
+                'package_status_id' => 1,
+            ],
+            [
+                'date' => Carbon::create(2023, 12, 31)->format('Y-m-d'),
+                'tracking_number' => Uuid::uuid4()->toString(),
+                'format' => 'parcel',
+                'weight' => 10,
+                'shipping_street' => 'Keizersgracht',
+                'shipping_house_number' => 555,
+                'shipping_city' => 'Amsterdam',
+                'shipping_zip_code' => '1017DR',
+                'delivery_street' => 'Korte Houtstraat',
+                'delivery_house_number' => 8,
+                'delivery_city' => 'Den Haag',
+                'delivery_zip_code' => '2511CD',
+                'user_id' => 7,
+                'delivery_driver' => "UPS",
+                'package_status_id' => 1,
+            ],
+            [
+                'date' => Carbon::create(2023, 10, 31)->format('Y-m-d'),
+                'tracking_number' => Uuid::uuid4()->toString(),
+                'format' => 'letter',
+                'weight' => 3,
+                'shipping_street' => 'Graanmarkt',
+                'shipping_house_number' => 22,
+                'shipping_city' => 'Antwerpen',
+                'shipping_zip_code' => '2000AB',
+                'delivery_street' => 'Rue Neuve',
+                'delivery_house_number' => 124,
+                'delivery_city' => 'Brussel',
+                'delivery_zip_code' => '1000CD',
+                'user_id' => 7,
+                'delivery_driver' => "DHL",
+                'package_status_id' => 2,
             ]
         ]);
     }

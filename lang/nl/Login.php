@@ -39,6 +39,7 @@ return [
     'CurrentPassword' => 'Huidig wachtwoord',
     'NewPassword' => 'Nieuw wachtwoord',
     'Guest' => 'Gast',
+    'NoAccountRegister' => 'Heb je nog geen account? Registreer',
 
 
 ];

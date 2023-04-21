@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <div class="alert alert-info">
+        create new recievers account
+        Track all your packages easily with this one trick!
+    </div>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 

@@ -7,4 +7,5 @@ return [
     'dutch' => 'Nederlands',
     'admin' => 'Admin',
     'pickups_list' => 'Ophaallijst',
+    'recievershistory' => 'Ontvangersgeschiedenis',
 ];

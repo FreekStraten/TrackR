@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
-})->name('homepage');
+Route::get('/', [\App\Http\Controllers\MainController::class, 'index'])->name('homepage')->middleware('auth');
 
 Route::post('/store-package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
 
@@ -66,6 +64,10 @@ Route::get('/pickups/create', [\App\Http\Controllers\PickupsController::class, '
 Route::post('/pickups/store', [\App\Http\Controllers\PickupsController::class, 'store'])->name('pickups.store')->middleware('auth');
 Route::get('/pickups/show/{id}', [\App\Http\Controllers\PickupsController::class, 'show'])->name('pickups.show')->middleware('auth');
 
+
+// reciever stuff
+Route::get('/recievers', [\App\Http\Controllers\RecieversController::class, 'index'])->name('recievers.index')->middleware('auth');
+Route::get('/recievers/history', [\App\Http\Controllers\RecieversController::class, 'history'])->name('recievers.history')->middleware('auth');
 
 
 Route::get('locale/{locale}', function ($locale) {

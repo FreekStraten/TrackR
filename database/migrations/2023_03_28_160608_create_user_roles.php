@@ -19,7 +19,7 @@ return new class extends Migration
         });
         // alter the users table
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('user_role')->default(2)
+            $table->foreignId('user_role')->default(5)
                 ->references('id')
                 ->on('user_roles')
                 ->onDelete('cascade');
