@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeliveryDriver;
+use App\Models\PackageStatus;
+use App\Models\Packet;
 use App\Models\Pickup;
 use Illuminate\Http\Request;
 
@@ -84,12 +86,27 @@ class RecieversController extends Controller
         }
 
         // get every packet that has been delivered to the user
-        $packets = $user->packets()->where('status', 'delivered')->get();
+        $packets = Packet::where('package_status_id', PackageStatus::DELIVERED_AT_FINAL_DESTINATION)->get();
+
+
 
 
         return view('recievers.history', [
-
+            'packets' => $packets,
         ]);
+    }
+
+    public function giveFeedback(Request $request)
+    {
+        $user = auth()->user();
+        if (!$user->isReciever()) {
+            return redirect()->route('packetList');
+        }
+        $packetId = $request->input('packet_id');
+        $packet = Packet::find($packetId);
+        $packet->feedback = $request->input('feedback');
+        $packet->save();
+        return redirect()->route('packetList');
     }
 
 

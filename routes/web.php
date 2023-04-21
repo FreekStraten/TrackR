@@ -68,6 +68,7 @@ Route::get('/pickups/show/{id}', [\App\Http\Controllers\PickupsController::class
 // reciever stuff
 Route::get('/recievers', [\App\Http\Controllers\RecieversController::class, 'index'])->name('recievers.index')->middleware('auth');
 Route::get('/recievers/history', [\App\Http\Controllers\RecieversController::class, 'history'])->name('recievers.history')->middleware('auth');
+Route::post('/recievers/feedback', [\App\Http\Controllers\RecieversController::class, 'giveFeedback'])->name('recievers.givefeedback')->middleware('auth');
 
 
 Route::get('locale/{locale}', function ($locale) {
