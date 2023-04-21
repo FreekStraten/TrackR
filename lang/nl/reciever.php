@@ -5,4 +5,5 @@ return [
     'submit' => 'Verstuur',
     'wasdelivered' => 'Het pakket is bezorgd op het adres',
     'count' => 'Totaal aantal pakketten bezorgd',
+    'history' => 'Geschiedenis',
 ];
