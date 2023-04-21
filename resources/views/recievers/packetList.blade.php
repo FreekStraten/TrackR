@@ -15,7 +15,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-2.5 flex justify-between items-center">
 
                 <div class="w-4/5 ml-2 flex">
-                    <form action="{{ route('user-packets-list')}}" method="GET" class="w-full mx-2 flex">
+                    <form action="{{ route('recievers.index')}}" method="GET" class="w-full mx-2 flex">
 
                         <input type="hidden" name="page" value="{{ $packets->currentPage() }}">
 

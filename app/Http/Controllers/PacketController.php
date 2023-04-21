@@ -20,6 +20,11 @@ class PacketController extends Controller
     {
         $user = auth()->user();
 
+        // check if the user is the right role
+        if (!$user->isSuperAdmin() || !$user->IsUser()) {
+            return response()->json(['error' => 'You are not allowed to access this page.'], 403);
+        }
+        
         $format = $request->input('format');
         $sortByDate = $request->input('sortByDate');
         $sortDirection = $request->input('sortDirection');

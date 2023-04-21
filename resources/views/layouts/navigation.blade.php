@@ -34,9 +34,13 @@
                     @endif
 
                     @if(!is_null(Auth::user()) && Auth::user()->isReciever())
-                    <x-nav-link :href="route('recievers.history')" :active="request()->routeIs('recievers.history')">
-                        {{ __('nav.recievershistory') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('recievers.index')" :active="request()->routeIs('recievers.index')">
+                            {{ __('nav.index') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('recievers.history')" :active="request()->routeIs('recievers.history')">
+                            {{ __('nav.recievershistory') }}
+                        </x-nav-link>
                     @endif
 
 

@@ -48,9 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/homepage', function () {
-    return view('homepage');
-})->name('homepage');
+Route::get('/homepage', [\App\Http\Controllers\MainController::class, 'index'])->name('homepage')->middleware('auth');
 
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.index')->middleware('auth');
 Route::get('/admin/create', [\App\Http\Controllers\AdminController::class, 'create'])->name('admin.create')->middleware('auth');
