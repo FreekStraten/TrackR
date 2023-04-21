@@ -8,4 +8,5 @@ return [
     'admin' => 'Admin',
     'pickups_list' => 'Ophaallijst',
     'recievershistory' => 'Ontvangersgeschiedenis',
+    'accounts' => 'Accounts',
 ];

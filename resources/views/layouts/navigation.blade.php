@@ -44,7 +44,7 @@
 
                     @if(!is_null(Auth::user()) && Auth::user()->isSuperAdmin())
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
-                        {{ __('index') }}
+                        {{ __('nav.accounts') }}
                     </x-nav-link>
 
 
