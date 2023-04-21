@@ -9,4 +9,5 @@ return [
     'pickups_list' => 'Ophaallijst',
     'recievershistory' => 'Ontvangersgeschiedenis',
     'accounts' => 'Accounts',
+    'mypackages' => 'Mijn pakketten'
 ];

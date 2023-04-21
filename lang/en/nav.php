@@ -9,4 +9,5 @@ return [
     'pickups_list' => 'Pickups list',
     'recievershistory' => 'Recievers history',
     'accounts' => 'Accounts',
+    'mypackages' => 'My packages',
 ];

@@ -35,7 +35,7 @@
 
                     @if(!is_null(Auth::user()) && Auth::user()->isReciever())
                         <x-nav-link :href="route('recievers.index')" :active="request()->routeIs('recievers.index')">
-                            {{ __('nav.index') }}
+                            {{ __('nav.mypackages') }}
                         </x-nav-link>
 
                         <x-nav-link :href="route('recievers.history')" :active="request()->routeIs('recievers.history')">
