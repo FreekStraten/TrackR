@@ -14,7 +14,7 @@ class RecieversController extends Controller
     {
         $user = auth()->user();
         if (!$user->isReciever()) {
-            return redirect()->route('packetList');
+            return redirect()->route('user-packets-list');
         }
         $format = $request->input('format');
         $sortByDate = $request->input('sortByDate');
@@ -82,7 +82,7 @@ class RecieversController extends Controller
     {
         $user = auth()->user();
         if (!$user->isReciever()) {
-            return redirect()->route('packetList');
+            return redirect()->route('user-packets-list');
         }
 
         // get every packet that has been delivered to the user
@@ -100,13 +100,13 @@ class RecieversController extends Controller
     {
         $user = auth()->user();
         if (!$user->isReciever()) {
-            return redirect()->route('packetList');
+            return redirect()->route('user-packets-list');
         }
         $packetId = $request->input('packet_id');
         $packet = Packet::find($packetId);
         $packet->feedback = $request->input('feedback');
         $packet->save();
-        return redirect()->route('packetList');
+        return redirect()->route('user-packets-list');
     }
 
 

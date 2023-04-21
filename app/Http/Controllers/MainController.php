@@ -21,7 +21,7 @@ class MainController extends Controller
         }
 
         if ($user->isUser()) {
-            return redirect()->route('packetList');
+            return redirect()->route('user-packets-list');
         }
 
 
