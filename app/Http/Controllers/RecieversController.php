@@ -88,9 +88,6 @@ class RecieversController extends Controller
         // get every packet that has been delivered to the user
         $packets = Packet::where('package_status_id', PackageStatus::DELIVERED_AT_FINAL_DESTINATION)->get();
 
-
-
-
         return view('recievers.history', [
             'packets' => $packets,
         ]);
@@ -102,13 +99,18 @@ class RecieversController extends Controller
         if (!$user->isReciever()) {
             return redirect()->route('user-packets-list');
         }
+
         $packetId = $request->input('packet_id');
         $packet = Packet::find($packetId);
+
+        if (!$packet) {
+            return redirect()->back()->withErrors(['Packet not found']);
+        }
+
         $packet->feedback = $request->input('feedback');
         $packet->save();
-        return redirect()->route('user-packets-list');
+
+        //refresh the page
+        return redirect()->back();
     }
-
-
-
 }

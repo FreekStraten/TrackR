@@ -28,6 +28,8 @@
 
                             <div>
                                 <form action="{{route('recievers.givefeedback')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="packet_id" value="{{$packet->id}}">
                                     <input class="form-control" type="text" name="feedback" id="feedback"
                                            placeholder="{{__('reciever.givefeedback')}}"
                                            onkeydown="if (event.keyCode === 13) this.form.submit();">
