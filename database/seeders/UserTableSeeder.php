@@ -72,6 +72,16 @@ class UserTableSeeder extends Seeder
             'api_key' => 'api_key_2'
         ]);
 
+        // reciever acount
+        DB::table('users')->insert([
+            'name' => 'reci',
+            'email' => 'reciever@gmail.com',
+            'password' => hash::make('reciever'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_role' => 5,
+        ]);
+
 
     }
 }

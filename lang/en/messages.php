@@ -41,4 +41,5 @@ return [
     'createpickupaction' => 'Create a pickup action',
     'details' => 'Details',
     'packets' => 'Packages',
+    'status' => 'Status',
 ];

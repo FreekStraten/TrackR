@@ -70,9 +70,7 @@ class PickupsController extends Controller
             'pickup_zip_code' => $request->pickup_zip_code,
         ]);
 
-
         $pickup->save();
-
 
         foreach($request->packetids as $id) {
             // if it exists
@@ -83,8 +81,6 @@ class PickupsController extends Controller
                 $packet->save();
             }
         }
-
-
 
         return redirect()->route('pickups.index');
     }

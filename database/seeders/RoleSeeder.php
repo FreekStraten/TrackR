@@ -30,6 +30,12 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'PackagePacker', // Is a role with only read access to the packages
                 'id' => 4,
+            ],
+            [
+                // customer reciever
+                'name' => 'Reciever',
+                'id' => 5,
+
             ]
         ];
 

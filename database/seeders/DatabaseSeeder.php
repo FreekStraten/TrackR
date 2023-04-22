@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            StatusSeeder::class,
             RoleSeeder::class,
             UserTableSeeder::class,
             DeliveryDriversTableSeeder::class,
             Packets::class,
-
         ]);
     }
 }

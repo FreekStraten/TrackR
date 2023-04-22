@@ -22,6 +22,8 @@ class Packet extends Model
         'delivery_house_number',
         'delivery_city',
         'delivery_zip_code',
+        'package_status_id',
+        'feedback'
     ];
 
     public function user()
@@ -37,5 +39,10 @@ class Packet extends Model
     public function pickup()
     {
         return $this->belongsTo(Pickup::class);
+    }
+
+    public function packageStatus()
+    {
+        return $this->belongsTo(PackageStatus::class);
     }
 }

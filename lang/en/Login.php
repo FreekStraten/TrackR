@@ -39,6 +39,7 @@ return [
     'CurrentPassword' => 'Current password',
     'NewPassword' => 'New password',
     'Guest' => 'Guest',
+    'NoAccountRegister' => 'Don\'t have an account? Register',
 
 
 

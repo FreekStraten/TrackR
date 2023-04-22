@@ -7,4 +7,7 @@ return [
     'dutch' => 'Dutch',
     'admin' => 'Admin',
     'pickups_list' => 'Pickups list',
+    'recievershistory' => 'Recievers history',
+    'accounts' => 'Accounts',
+    'mypackages' => 'My packages',
 ];

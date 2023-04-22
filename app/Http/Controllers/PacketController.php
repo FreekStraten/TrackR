@@ -20,6 +20,8 @@ class PacketController extends Controller
     {
         $user = auth()->user();
 
+
+
         $format = $request->input('format');
         $sortByDate = $request->input('sortByDate');
         $sortDirection = $request->input('sortDirection');
