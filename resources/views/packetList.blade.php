@@ -94,8 +94,8 @@
                             @if(isset($packets))
                                 @foreach($packets as $packet)
                                     <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleRowSelection(this)">
-                                        <td><a  href="{{ route('showQR', ['id' => $packet->id]) }}" class="fa fa-qrcode no-underline text-black" style="font-size:24px"></a></td>
                                         <td class="hidden" id="{{ $packet->id }}"></td>
+                                        <td><a  href="{{ route('showQR', ['id' => $packet->id]) }}" class="fa fa-qrcode no-underline text-black" style="font-size:24px"></a></td>
                                         <td>{{ $packet->date }}</td>
                                         <td>{{ $packet->tracking_number }}</td>
                                         <td>{{ $packet->format }}</td>
