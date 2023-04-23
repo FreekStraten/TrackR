@@ -212,7 +212,7 @@ class PacketController extends Controller
 
     ///////******** THE FOLLOWING METHODS ARE JUST FOR TESTING ********//////
 
-    //JUST FOR TESTING
+    //METHOD JUST FOR TESTING
     public function showQR($id)
     {
         $packet = Packet::find($id);
