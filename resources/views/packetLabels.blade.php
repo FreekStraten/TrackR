@@ -28,13 +28,20 @@
 
         <div class="delivery-details">
             <h2>{{ __('messages.delivery_address') }}</h2>
-            <<p>{{ $packet->delivery_street }} {{ $packet->delivery_house_number }}</p>
+            <p>{{ $packet->delivery_street }} {{ $packet->delivery_house_number }}</p>
             <p>{{ $packet->delivery_zip_code }} {{ $packet->delivery_city }}</p>
         </div>
 
         <br>
         <div class="footer">
-            {!! $qrCodes !!}
+
+            <!-- show qr code -->
+            @if($packet->qrCode == null)
+                <p>QR Code is null</p>
+            @else
+                <p>{!! $packet->qrCode !!}</p>
+            @endif
+
             <p>{{ __('messages.generated_by_trackr') }}</p>
         </div>
     </div>
