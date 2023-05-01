@@ -42,7 +42,7 @@ class CalendarController extends Controller
             ->whereBetween('pick_up_date_time', [$firstDayOfMonth, $lastDayOfMonth])
             ->get();
 
-        return view('calendar', compact('year', 'month', 'firstDayOfMonth', 'lastDayOfMonth', 'daysOfWeek', 'calendarDays', 'today', 'pickUps'));
+        return view('calendar', compact('year', 'month', 'firstDayOfMonth', 'daysOfWeek', 'calendarDays', 'today', 'pickUps'));
     }
 }
 
