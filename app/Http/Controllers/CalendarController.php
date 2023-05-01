@@ -28,7 +28,6 @@ class CalendarController extends Controller
             $calendarDays[] = $day;
         }
 
-
         $pickUps = DB::table('pick_ups')
             ->whereBetween('pick_up_date_time', [$firstDayOfMonth, $lastDayOfMonth])
             ->get();
