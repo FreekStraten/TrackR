@@ -53,7 +53,8 @@ Route::post('/recievers/feedback', [\App\Http\Controllers\RecieversController::c
 Route::get('/packetLabel/{id}', [App\Http\Controllers\PacketController::class, 'packetLabel'])->name('packetLabel')->middleware('auth');
 Route::get('/packetLabels', [App\Http\Controllers\PacketController::class, 'packetLabels'])->name('packetLabels')->middleware('auth');
 
-
+//calender
+Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'index'])->name('calendar.index')->middleware('auth');
 
 
 
