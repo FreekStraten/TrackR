@@ -39,7 +39,6 @@
                 </div>
                 <div class="pb-6 mx-4">
                     <div class="align-middle">
-                        {{--                        {{ $packets->links() }}--}}
                     </div>
                 </div>
             </div>

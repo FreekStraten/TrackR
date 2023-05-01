@@ -35,7 +35,9 @@
                                     {{ $day }}
                                     @foreach ($pickUps as $pickUp)
                                         @if (\Carbon\Carbon::parse($pickUp->pick_up_date_time)->day === $day)
-                                            ID: {{$pickUp->id }}
+                                            <!-- send to http://127.0.0.1:8000/packets?pickup_id=2 -->
+                                            <a href="{{ route('user-packets-list', ['pickup_id' => $pickUp->id]) }}"
+                                               class="text-blue-600 hover:text-blue-800">ID: {{$pickUp->id }}</a>
                                         @endif
                                     @endforeach
                                 </div>
