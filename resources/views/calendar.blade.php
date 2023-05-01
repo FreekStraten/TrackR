@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h3 class="font-semibold text text-gray-800 leading-tight">
-            Calendar overview
+            {{__('calendar.calendar_overview')}}
         </h3>
     </x-slot>
 
@@ -16,17 +16,20 @@
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-10">
                     <div class="flex justify-between items-center mb-8">
                         <a href="{{ route('calendar.index', ['year' => $year, 'month' => $month - 1]) }}"
-                           class="text-blue-600 hover:text-blue-800">&lt; Previous Month</a>
-                        <h2 class="text-lg font-bold">{{ $firstDayOfMonth->format('F Y') }}</h2>
+                           class="text-blue-600 hover:text-blue-800">< {{__('calendar.previous_month')}}</a>
+
+                        <h2 class="text-lg font-bold">{{ $firstDayOfMonth->formatLocalized('%B %Y') }}</h2>
+
                         <a href="{{ route('calendar.index', ['year' => $year, 'month' => $month + 1]) }}"
-                           class="text-blue-600 hover:text-blue-800">Next Month &gt;</a>
+                           class="text-blue-600 hover:text-blue-800">{{__('calendar.next_month')}} &gt;</a>
                     </div>
 
                     <div class="grid grid-cols-7 gap-4">
 
-                        @foreach ($daysOfWeek as $dayOfWeek)
-                            <div class="text-center text-gray-500 font-bold">{{ $dayOfWeek }}</div>
+                        @foreach (__('days') as $day)
+                            <div class="text-center text-gray-500 font-bold">{{ $day }}</div>
                         @endforeach
+
 
                         @foreach ($calendarDays as $key => $day)
                             @if ($day !== '')
@@ -35,7 +38,7 @@
                                     {{ $day }}
                                     @foreach ($pickUps as $pickUp)
                                         @if (\Carbon\Carbon::parse($pickUp->pick_up_date_time)->day === $day)
-                                            <!-- send to http://127.0.0.1:8000/packets?pickup_id=2 -->
+                                            <!-- send to /packets?pickup_id=2 -->
                                             <a href="{{ route('user-packets-list', ['pickup_id' => $pickUp->id]) }}"
                                                class="text-blue-600 hover:text-blue-800">ID: {{$pickUp->id }}</a>
                                         @endif
