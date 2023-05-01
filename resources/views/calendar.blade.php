@@ -31,17 +31,19 @@
                             <div class="text-center text-gray-500 font-bold">{{ $day }}</div>
                         @endforeach
 
-
                         @foreach ($calendarDays as $key => $day)
                             @if ($day !== '')
+                                @php
+                                    $calendarDay = Carbon\Carbon::createFromDate($year, $month, $day, 'CET');
+                                @endphp
                                 <div
-                                    class="text-center border rounded p-2 {{ $day === $today->day && $month === $today->month && $year === $today->year ? 'bg-gray-200' : '' }}">
+                                    class="text-center border rounded p-2 {{ $calendarDay->isSameDay($today) ? 'bg-gray-200' : '' }}">
                                     {{ $day }}
                                     @foreach ($pickUps as $pickUp)
-                                        @if (\Carbon\Carbon::parse($pickUp->pick_up_date_time)->day === $day)
+                                        @if ($calendarDay->isSameDay(Carbon\Carbon::parse($pickUp->pick_up_date_time)))
                                             <!-- send to /packets?pickup_id=2 -->
                                             <a href="{{ route('user-packets-list', ['pickup_id' => $pickUp->id]) }}"
-                                               class="text-blue-600 hover:text-blue-800">ID: {{$pickUp->id }}</a>
+                                               class="text-blue-600 hover:text-blue-800">ID: {{ $pickUp->id }}</a>
                                         @endif
                                     @endforeach
                                 </div>
