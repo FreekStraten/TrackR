@@ -84,7 +84,7 @@
                         <tbody>
                         @if(isset($packets))
                             @foreach($packets as $packet)
-                                <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleRowSelection(this)">
+                                <tr>
                                     <td class="hidden" id="{{ $packet->id }}"></td>
                                     <td>{{ $packet->date }}</td>
                                     <td>{{ $packet->tracking_number }}</td>
