@@ -98,8 +98,8 @@
                                         <td><a  href="{{ route('showQR', ['id' => $packet->id]) }}" class="fa fa-qrcode no-underline text-black" style="font-size:24px"></a></td>
                                         <td>{{ $packet->date }}</td>
                                         <td>{{ $packet->tracking_number }}</td>
-                                        <td>{{ $packet->format }}</td>
-                                        <td>{{ $packet->weight }}</td>
+                                        <td>{{ __('messages.' . $packet->format)}}</td>
+                                        <td>{{ $packet->weight }}g</td>
                                         <td>{{ $packet->shipping_street }}, {{ $packet->shipping_house_number }}
                                             , {{ $packet->shipping_zip_code }} {{ $packet->shipping_city }}</td>
                                         <td>{{ $packet->delivery_street }}, {{ $packet->delivery_house_number }}
