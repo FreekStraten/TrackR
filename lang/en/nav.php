@@ -10,4 +10,5 @@ return [
     'recievershistory' => 'Recievers history',
     'accounts' => 'Accounts',
     'mypackages' => 'My packages',
+    'calendar' => 'Calendar',
 ];
