@@ -108,8 +108,8 @@
                                             <form action="{{ route('saveDriver') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $packet->id }}">
-                                                <select name="delivery_driver" id="driver" class="form-control mr-2"
-                                                        onchange="this.form.submit()">
+                                                <select name="delivery_driver" id="driver-{{ $packet->id }}" class="form-control mr-2"
+                                                        onchange="document.getElementById('driver-form-{{ $packet->id }}').submit()">
                                                     <option value="">-</option>
                                                     @foreach($delivery_drivers as $driver)
                                                         <option
