@@ -91,174 +91,172 @@ class PacketController extends Controller
 
     public function store(Request $request)
     {
-        // Check if request has an API key
-        if ($request->has('api_key')) {
-            $user = \App\Models\User::where('api_key', $request->api_key)->first();
 
-            // Check if user with provided API key exists
-            if (!$user) {
-                return response()->json(['message' => 'Invalid API key.'], 401);
-            }
-        } else {
-            // If no API key provided, get the authenticated user
-            $user = auth()->user();
+        // If no API key provided, get the authenticated user
+        $user = auth()->user();
 
-            // Check if user is authenticated
-            if (!$user) {
-                return response()->json(['message' => 'Unauthorized.'], 401);
-            }
+        // Check if user is authenticated
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized.'], 401);
         }
 
-        $packet = new Packet([
-            'date' => $request['date'],
-            'tracking_number' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
-            'format' => $request['format'],
-            'weight' => $request['weight'],
-            'shipping_street' => $request['shipping_streetname'],
-            'shipping_house_number' => $request['shipping_housenumber'],
-            'shipping_city' => $request['shipping_city'],
-            'shipping_zip_code' => $request['shipping_zipcode'],
-            'delivery_street' => $request['delivery_streetname'],
-            'delivery_house_number' => $request['delivery_housenumber'],
-            'delivery_city' => $request['delivery_city'],
-            'delivery_zip_code' => $request['delivery_zipcode'],
-        ]);
-
-        $packet->user()->associate($user); // associate the user with the packet
-        $packet->save();
-
-        if ($request->ajax()) {
-            return response()->json([
-                'message' => 'Packet created successfully.',
-                'packet' => $packet
+            $packet = new Packet([
+                'date' => $request['date'],
+                'tracking_number' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
+                'format' => $request['format'],
+                'weight' => $request['weight'],
+                'shipping_street' => $request['shipping_streetname'],
+                'shipping_house_number' => $request['shipping_housenumber'],
+                'shipping_city' => $request['shipping_city'],
+                'shipping_zip_code' => $request['shipping_zipcode'],
+                'delivery_street' => $request['delivery_streetname'],
+                'delivery_house_number' => $request['delivery_housenumber'],
+                'delivery_city' => $request['delivery_city'],
+                'delivery_zip_code' => $request['delivery_zipcode'],
             ]);
-        } else {
-            return view('packetCreate')->with('success', 'Packet created successfully.');
+
+            $packet->user()->associate($user); // associate the user with the packet
+            $packet->save();
+
+            if ($request->ajax()) {
+                return response()->json([
+                    'message' => 'Packet created successfully.',
+                    'packet' => $packet
+                ]);
+            } else {
+                return view('packetCreate')->with('success', 'Packet created successfully.');
+            }
         }
-    }
 
 
-    public function uploadCsv(Request $request)
-    {
-        $file = $request->file('csv_file');
+        public
+        function uploadCsv(Request $request)
+        {
+            $file = $request->file('csv_file');
 
-        if (($handle = fopen($request->file('csv_file')->getPathname(), 'r')) !== false) {
+            if (($handle = fopen($request->file('csv_file')->getPathname(), 'r')) !== false) {
 
-            //ignore the first row
-            fgetcsv($handle, 1000, ',');
+                //ignore the first row
+                fgetcsv($handle, 1000, ',');
 
-            // loop through the CSV rows
-            while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+                // loop through the CSV rows
+                while (($data = fgetcsv($handle, 1000, ',')) !== false) {
 
-                $packet = new Packet();
-                $packet->date = $data[0];
-                $packet->tracking_number = $data[1];
-                $packet->format = $data[2];
-                $packet->weight = $data[3];
-                $packet->shipping_street = $data[4];
-                $packet->shipping_house_number = $data[5];
-                $packet->shipping_city = $data[6];
-                $packet->shipping_zip_code = $data[7];
-                $packet->delivery_street = $data[8];
-                $packet->delivery_house_number = $data[9];
-                $packet->delivery_city = $data[10];
-                $packet->delivery_zip_code = $data[11];
+                    $packet = new Packet();
+                    $packet->date = $data[0];
+                    $packet->tracking_number = $data[1];
+                    $packet->format = $data[2];
+                    $packet->weight = $data[3];
+                    $packet->shipping_street = $data[4];
+                    $packet->shipping_house_number = $data[5];
+                    $packet->shipping_city = $data[6];
+                    $packet->shipping_zip_code = $data[7];
+                    $packet->delivery_street = $data[8];
+                    $packet->delivery_house_number = $data[9];
+                    $packet->delivery_city = $data[10];
+                    $packet->delivery_zip_code = $data[11];
 
-                $packet->save();
+                    $packet->save();
+                }
+
+                fclose($handle);
             }
 
-            fclose($handle);
+            return redirect()->back()->with('success', 'CSV file imported successfully.');
         }
 
-        return redirect()->back()->with('success', 'CSV file imported successfully.');
-    }
+        //add delivery driver to the database
+        public
+        function saveDriver()
+        {
+            $id = request('id');
+            $deliveryDriver = request('delivery_driver');
+            $packet = Packet::find($id);
 
-    //add delivery driver to the database
-    public function saveDriver()
-    {
-        $id = request('id');
-        $deliveryDriver = request('delivery_driver');
-        $packet = Packet::find($id);
+            $driverExists = DeliveryDriver::where('name', $deliveryDriver)->exists();
 
-        $driverExists = DeliveryDriver::where('name', $deliveryDriver)->exists();
+            if ($driverExists) {
+                $packet->delivery_driver = $deliveryDriver;
+            } else {
+                $packet->delivery_driver = null;
+            }
 
-        if ($driverExists) {
-            $packet->delivery_driver = $deliveryDriver;
-        } else {
-            $packet->delivery_driver = null;
+            $packet->save();
+            return redirect()->back()->with('success', 'Delivery driver added successfully.');
         }
 
-        $packet->save();
-        return redirect()->back()->with('success', 'Delivery driver added successfully.');
-    }
+        public
+        function createLabels()
+        {
+            $user = auth()->user(); // Get the authenticated user
+            $packets = $user->packets; // Get all packets associated with the user
 
-    public function createLabels()
-    {
-        $user = auth()->user(); // Get the authenticated user
-        $packets = $user->packets; // Get all packets associated with the user
+            //add qr code to the packets
+            foreach ($packets as $packet) {
+                $qrCode = QrCode::size(250)->generate($packet->tracking_number);
+                $packet->qrCode = $qrCode;
+            }
 
-        //add qr code to the packets
-        foreach ($packets as $packet) {
+            $pdf = app('dompdf.wrapper')->loadView('packetLabels', compact('packets'));
+            return $pdf->download('packetLabel.pdf');
+        }
+
+        //create a pdf packet label for the packet use dompdf
+        public
+        function createLabel($id)
+        {
+            $packet = Packet::find($id);
+
+            //add qr code to the packet
             $qrCode = QrCode::size(250)->generate($packet->tracking_number);
             $packet->qrCode = $qrCode;
+
+            $pdf = app('dompdf.wrapper')->loadView('packetLabel', compact('packet'));
+            return $pdf->download('packetLabel.pdf');
         }
 
-        $pdf = app('dompdf.wrapper')->loadView('packetLabels', compact('packets'));
-        return $pdf->download('packetLabel.pdf');
-    }
 
-    //create a pdf packet label for the packet use dompdf
-    public function createLabel($id)
-    {
-        $packet = Packet::find($id);
+        ///////******** THE FOLLOWING METHODS ARE JUST FOR TESTING ********//////
 
-        //add qr code to the packet
-        $qrCode = QrCode::size(250)->generate($packet->tracking_number);
-        $packet->qrCode = $qrCode;
+        //METHOD JUST FOR TESTING
+        public
+        function showQR($id)
+        {
+            $packet = Packet::find($id);
 
-        $pdf = app('dompdf.wrapper')->loadView('packetLabel', compact('packet'));
-        return $pdf->download('packetLabel.pdf');
-    }
-
-
-    ///////******** THE FOLLOWING METHODS ARE JUST FOR TESTING ********//////
-
-    //METHOD JUST FOR TESTING
-    public function showQR($id)
-    {
-        $packet = Packet::find($id);
-
-        $qrCode = QrCode::size(250)->generate($packet->tracking_number);
-        $packet->qrCode = $qrCode;
-
-        return view('QRcode', compact('packet'));
-    }
-
-    //METHOD JUST FOR TESTING
-    public function packetLabels()
-    {
-        $user = auth()->user(); // Get the authenticated user
-        $packets = $user->packets; // Get all packets associated with the user
-
-        //add qr code for each packet
-        foreach ($packets as $packet) {
             $qrCode = QrCode::size(250)->generate($packet->tracking_number);
-            //make the qr code a png image
             $packet->qrCode = $qrCode;
+
+            return view('QRcode', compact('packet'));
         }
 
-        return view('packetLabels', compact('packets'));
+        //METHOD JUST FOR TESTING
+        public
+        function packetLabels()
+        {
+            $user = auth()->user(); // Get the authenticated user
+            $packets = $user->packets; // Get all packets associated with the user
+
+            //add qr code for each packet
+            foreach ($packets as $packet) {
+                $qrCode = QrCode::size(250)->generate($packet->tracking_number);
+                //make the qr code a png image
+                $packet->qrCode = $qrCode;
+            }
+
+            return view('packetLabels', compact('packets'));
+        }
+
+        //METHOD JUST FOR TESTING
+        public
+        function packetLabel($id)
+        {
+            $packet = Packet::find($id);
+
+            //add qr code for a packet
+            $qrCode = QrCode::size(250)->format('png')->generate($packet->tracking_number);
+            $packet->qrCode = $qrCode;
+
+            return view('packetLabel', compact('packet'));
+        }
     }
-
-    //METHOD JUST FOR TESTING
-    public function packetLabel($id)
-    {
-        $packet = Packet::find($id);
-
-        //add qr code for a packet
-        $qrCode = QrCode::size(250)->format('png')->generate($packet->tracking_number);
-        $packet->qrCode = $qrCode;
-
-        return view('packetLabel', compact('packet' ));
-    }
-}
