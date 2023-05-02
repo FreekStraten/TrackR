@@ -91,8 +91,6 @@ class PacketController extends Controller
 
     public function store(Request $request)
     {
-
-        // If no API key provided, get the authenticated user
         $user = auth()->user();
 
         // Check if user is authenticated
