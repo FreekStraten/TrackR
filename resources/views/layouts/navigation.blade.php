@@ -31,6 +31,12 @@
                     <x-nav-link :href="route('pickups.index')" :active="request()->routeIs('pickups.index')">
                         {{ __('nav.pickups_list') }}
                     </x-nav-link>
+
+                        <x-nav-link :href="route('calendar.index')" :active="request()->routeIs('pickups.index')">
+                            {{ __('nav.calendar') }}
+                        </x-nav-link>
+
+
                     @endif
 
                     @if(!is_null(Auth::user()) && Auth::user()->isReciever())
