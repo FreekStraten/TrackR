@@ -11,6 +11,8 @@ class CalendarController extends Controller
 {
     public function index(Request $request)
     {
+        $user = auth()->user();// get the authenticated user
+
         $today = Carbon::now();
         $month = $request->input('month', now()->month);
         $year = $request->input('year', now()->year);
@@ -29,10 +31,12 @@ class CalendarController extends Controller
         }
 
         $pickUps = DB::table('pick_ups')
+            ->join('packets', 'pick_ups.id', '=', 'packets.id')
+            ->where('packets.user_id', $user->id)
             ->whereBetween('pick_up_date_time', [$firstDayOfMonth, $lastDayOfMonth])
             ->get();
 
-        return view('calendar', compact('month', 'year', 'firstDayOfMonth','calendarDays', 'today', 'pickUps'));
+        return view('calendar', compact('today', 'month', 'year', 'firstDayOfMonth', 'calendarDays', 'pickUps'));
     }
 }
 
