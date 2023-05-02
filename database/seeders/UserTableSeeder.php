@@ -59,7 +59,6 @@ class UserTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'user_role' => 2,
-            'api_key' => 'api_key_1'
         ]);
 
         DB::table('users')->insert([
@@ -69,7 +68,6 @@ class UserTableSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'user_role' => 1,
-            'api_key' => 'api_key_2'
         ]);
 
         // reciever acount

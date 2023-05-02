@@ -15,9 +15,9 @@
                     {{-- <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                          {{ __('Home') }}
                      </x-nav-link>--}}
-                    <x-nav-link :href="route('homepage')" :active="request()->routeIs('homepage')">
-                        {{ __('nav.homepage') }}
-                    </x-nav-link>
+{{--                    <x-nav-link :href="route('homepage')" :active="request()->routeIs('homepage')">--}}
+{{--                        {{ __('nav.homepage') }}--}}
+{{--                    </x-nav-link>--}}
 
                     @if(!is_null(Auth::user()) && Auth::user()->isSuperAdmin() || Auth::user()->isUser())
                     <x-nav-link :href="route('create-package')" :active="request()->routeIs('create-package')">
