@@ -23,7 +23,8 @@ class Packet extends Model
         'delivery_city',
         'delivery_zip_code',
         'package_status_id',
-        'feedback'
+        'feedback',
+        'qrCode'
     ];
 
     public function user()
