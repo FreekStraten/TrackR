@@ -18,4 +18,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::post('/packets', [PacketController::class, 'store']);
+
+//create an API for the packets store
+Route::middleware('auth:sanctum')->post('/packetAPI', [App\Http\Controllers\PacketController::class, 'store']);
+
+
+
+
