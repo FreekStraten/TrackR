@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeliveryDriver;
+use App\Models\PackageStatus;
 use App\Models\Packet;
 use App\Models\Pickup;
 use App\Models\User;
@@ -91,18 +92,63 @@ class PacketController extends Controller
         ]);
     }
 
+    public function changeStatus(Request $request)
+    {
+        $user = auth()->user();
+
+        $tracking_number = $request->input('tracking_number');
+        $status = $request->input('status');
+
+        //check if packet exists in database
+        $packet = Packet::where('tracking_number', $tracking_number)->first();
+        if (!$packet) {
+            //return json response
+            return response()->json([
+                'success' => false,
+                'message' => 'Packet not found',
+            ], 400);
+        }
+
+        // check if package_status  name exists in database table package_status->name
+        $packageStatus = PackageStatus::where('name', $status)->first();
+        if (!$packageStatus) {
+            //return json response
+            return response()->json([
+                'success' => false,
+                'message' => 'Package status not found',
+            ], 400);
+        }
+
+        //get id of packagestatus based on name
+        $packageStatusId = PackageStatus::where('name', $status)->first()->id;
+
+
+        //change the packet status
+        $packet->package_status_id = $packageStatusId;
+
+        //save
+        $packet->save();
+
+
+        //return json succes with message including packet and package status
+        return response()->json([
+            'success' => true,
+            'message' => 'Packet status changed',
+            'packet' => $packet,
+            'package_status' => $status,
+        ], 200);
+
+    }
+
+
     public function store(Request $request)
     {
-        //log test
-        Facades\Log::info('enterd store method NEW TEST');
-
         $user = auth()->user();
 
         //log "test"
-
         $token = $user->createToken('auth_token')->plainTextToken;
 
-
+        //if user has role
         Facades\Log::info('test');
         Facades\Log::info('Authenticated User: '.$user);
         Facades\Log::info('CSRF Token: '.$token);
