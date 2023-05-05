@@ -45,7 +45,6 @@
                             </div>
                         </div>
 
-
                         <div class="col">
                             <div class="form-group">
                                 <label class="font-semibold invisible" for="time">{{ __('pickups.pickup_location') }}</label>
@@ -82,7 +81,6 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-
 
 
                 </form>

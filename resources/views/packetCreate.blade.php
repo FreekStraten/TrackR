@@ -114,7 +114,6 @@
                                 </form>
                             </div>
 
-
                             <!-- Packet CSV Creation !-->
                             <div id="tab2" class="tab-content" style="display:none;">
                                 <h4 class="font-semibold text text-gray-800 leading-tight">{{ __('messages.upload_csv') }}</h4>

@@ -18,7 +18,6 @@
                         <a href="{{ route('calendar.index', ['year' => $year, 'month' => $month - 1]) }}"
                            class="text-blue-600 hover:text-blue-800">< {{__('calendar.previous_month')}}</a>
 
-                        <!-- month number from months.php in lang -->
                         <h2 class="text-lg font-bold">{{__('months.' . (int) $firstDayOfMonth->format('m'))}}  {{ $firstDayOfMonth->format('Y') }}</h2>
 
                         <a href="{{ route('calendar.index', ['year' => $year, 'month' => $month + 1]) }}"
@@ -51,9 +50,9 @@
                                 <div></div>
                             @endif
                         @endforeach
+
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
