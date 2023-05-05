@@ -8,7 +8,6 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-{{--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">--}}
     </x-slot>
 
     <div class="pt-10">
@@ -22,38 +21,27 @@
 
                         <label for="format" class="sr-only">{{ __('messages.format') }}</label>
                         <select name="format" id="format" class="form-control mr-2" onchange="this.form.submit()">
-                            <option
-                                value=""{{ empty($selectedFormat) ? ' selected' : '' }}>{{ __('messages.all_formats') }}</option>
-                            <option
-                                value="letter"{{ $selectedFormat === 'letter' ? ' selected' : '' }}>{{ __('messages.letter') }}</option>
-                            <option
-                                value="parcel"{{ $selectedFormat === 'parcel' ? ' selected' : '' }}>{{ __('messages.parcel') }}</option>
+                            <option value=""{{ empty($selectedFormat) ? ' selected' : '' }}>{{ __('messages.all_formats') }}</option>
+                            <option value="letter"{{ $selectedFormat === 'letter' ? ' selected' : '' }}>{{ __('messages.letter') }}</option>
+                            <option value="parcel"{{ $selectedFormat === 'parcel' ? ' selected' : '' }}>{{ __('messages.parcel') }}</option>
                         </select>
 
                         <label for="sortByDate" class="sr-only">{{ __('messages.sort_by_date') }}</label>
-                        <select name="sortByDate" id="sortByDate" class="form-control mr-2"
-                                onchange="this.form.submit()">
+                        <select name="sortByDate" id="sortByDate" class="form-control mr-2" onchange="this.form.submit()">
                             <option value="">{{ __('messages.no_date') }}</option>
-                            <option
-                                value="asc"{{ $sortByDate === 'asc' ? ' selected' : '' }}>{{ __('messages.date_asc') }}</option>
-                            <option
-                                value="desc"{{ $sortByDate === 'desc' ? ' selected' : '' }}> {{__('messages.date_desc') }}</option>
+                            <option value="asc"{{ $sortByDate === 'asc' ? ' selected' : '' }}>{{ __('messages.date_asc') }}</option>
+                            <option value="desc"{{ $sortByDate === 'desc' ? ' selected' : '' }}> {{__('messages.date_desc') }}</option>
                         </select>
 
                         <label for="sortDirection" class="sr-only">{{ __('messages.  sort_direction') }}</label>
-                        <select name="sortDirection" id="sortDirection" class="form-control mr-2"
-                                onchange="this.form.submit()">
+                        <select name="sortDirection" id="sortDirection" class="form-control mr-2" onchange="this.form.submit()">
                             <option value="">{{ __('messages.no_weight') }}</option>
-                            <option
-                                value="asc"{{ $sortDirection === 'asc' ? ' selected' : '' }}>{{ __('messages.weight_asc') }}</option>
-                            <option
-                                value="desc"{{ $sortDirection === 'desc' ? ' selected' : '' }}> {{__('messages.weight_desc') }}</option>
+                            <option value="asc"{{ $sortDirection === 'asc' ? ' selected' : '' }}>{{ __('messages.weight_asc') }}</option>
+                            <option value="desc"{{ $sortDirection === 'desc' ? ' selected' : '' }}> {{__('messages.weight_desc') }}</option>
                         </select>
 
                         <input type="hidden" name="page" value="{{ $packets->currentPage() }}">
-                        <input value="{{ $searchTerm }}" type="text" name="search" class="form-control mr-2"
-                               placeholder="{{ __('messages.search') }}"
-                               onkeydown="if (event.keyCode === 13) this.form.submit();">
+                        <input value="{{ $searchTerm }}" type="text" name="search" class="form-control mr-2" placeholder="{{ __('messages.search') }}" onkeydown="if (event.keyCode === 13) this.form.submit();">
                     </form>
                 </div>
 
@@ -91,7 +79,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @if(isset($packets))
                                 @foreach($packets as $packet)
                                     <tr class="cursor-pointer hover:bg-gray-100" onclick="toggleRowSelection(this)">
                                         <td class="hidden" id="{{ $packet->id }}"></td>
@@ -124,7 +111,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endif
                             </tbody>
                         </table>
                     </div>

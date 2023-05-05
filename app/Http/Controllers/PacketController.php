@@ -23,21 +23,15 @@ class PacketController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
+        $delivery_drivers = DeliveryDriver::all();
 
         $format = $request->input('format');
         $sortByDate = $request->input('sortByDate');
         $sortDirection = $request->input('sortDirection');
         $page = $request->input('page', 1);
-
         $searchTerm = $request->input('search');
 
         $query = $user->packets();
-
-//        //create a QR code for each packet
-//        $packets = $query->get();
-//        foreach ($packets as $packet) {
-//            $packet->qr_code = QrCode::size(200)->generate($packet->tracking_number);
-//        }
 
         //search the packets by the search term using Full Text Search on the key name is fulltext_i_delivery
         if (!empty($searchTerm)) {
@@ -46,9 +40,9 @@ class PacketController extends Controller
                                 OR MATCH(shipping_street, shipping_house_number, shipping_city, shipping_zip_code) AGAINST(? IN BOOLEAN MODE))", [$fixedSearchTerm, $fixedSearchTerm]);
         }
 
-        $pickupspecification = $request->input('pickup_id');
-        if (!empty($pickupspecification)) {
-            $query = $query->where('pick_up_id', $pickupspecification);
+        $pickups_specification = $request->input('pickup_id');
+        if (!empty($pickups_specification)) {
+            $query = $query->where('pick_up_id', $pickups_specification);
         }
 
         if (!empty($format)) {
@@ -72,13 +66,12 @@ class PacketController extends Controller
             'search' => $searchTerm,
         ]);
 
-        $delivery_drivers = DeliveryDriver::all();
 
         // for each packet in the list, get the pickup if it exists
         foreach ($packets as $packet) {
-            if ($packet->pick_up_id) {
-                // get the pickup
-                $packet->pickup = Pickup::find($packet->pick_up_id);
+            $pickup = Pickup::find($packet->pick_up_id);
+            if ($pickup) {
+                $packet->pickup = $pickup;
             }
         }
 
@@ -112,7 +105,6 @@ class PacketController extends Controller
         // check if package_status  name exists in database table package_status->name
         $packageStatus = PackageStatus::where('name', $status)->first();
         if (!$packageStatus) {
-            //return json response
             return response()->json([
                 'success' => false,
                 'message' => 'Package status not found',
@@ -122,22 +114,16 @@ class PacketController extends Controller
         //get id of packagestatus based on name
         $packageStatusId = PackageStatus::where('name', $status)->first()->id;
 
-
-        //change the packet status
         $packet->package_status_id = $packageStatusId;
-
-        //save
         $packet->save();
 
 
-        //return json succes with message including packet and package status
         return response()->json([
             'success' => true,
             'message' => 'Packet status changed',
             'packet' => $packet,
             'package_status' => $status,
         ], 200);
-
     }
 
 
@@ -145,13 +131,11 @@ class PacketController extends Controller
     {
         $user = auth()->user();
 
-        //log "test"
         $token = $user->createToken('auth_token')->plainTextToken;
 
         //if user has role
-        Facades\Log::info('test');
-        Facades\Log::info('Authenticated User: '.$user);
-        Facades\Log::info('CSRF Token: '.$token);
+        Facades\Log::info('Authenticated User: ' . $user);
+        Facades\Log::info('CSRF Token: ' . $token);
 
         $packetData = [
             'date' => $request->input('date'),
@@ -177,8 +161,6 @@ class PacketController extends Controller
 
         return view('packetCreate')->with('success', 'Packet created successfully.');
     }
-
-
 
 
     public
@@ -210,10 +192,8 @@ class PacketController extends Controller
 
                 $packet->save();
             }
-
             fclose($handle);
         }
-
         return redirect()->back()->with('success', 'CSV file imported successfully.');
     }
 
@@ -240,8 +220,8 @@ class PacketController extends Controller
     public
     function createLabels()
     {
-        $user = auth()->user(); // Get the authenticated user
-        $packets = $user->packets; // Get all packets associated with the user
+        $user = auth()->user();
+        $packets = $user->packets;
 
         //add qr code to the packets
         foreach ($packets as $packet) {
@@ -266,6 +246,9 @@ class PacketController extends Controller
         $pdf = app('dompdf.wrapper')->loadView('packetLabel', compact('packet'));
         return $pdf->download('packetLabel.pdf');
     }
+
+
+
 
 
     ///////******** THE FOLLOWING METHODS ARE JUST FOR TESTING ********//////

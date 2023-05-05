@@ -19,11 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-//create an API for the packets store
+//API for the packets store
 Route::middleware('auth:sanctum')->post('/packetAPI', [App\Http\Controllers\PacketController::class, 'store']);
 
-
-//create an API for the changeStatus
+//API for the changeStatus
 Route::middleware('auth:sanctum')->post('/changeStatus', [App\Http\Controllers\PacketController::class, 'changeStatus']);
 
 
