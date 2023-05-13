@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -85,4 +86,9 @@ Route::get('locale/{locale}', function ($locale) {
 })->name('locale');
 
 require __DIR__ . '/auth.php';
+
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+    ->middleware(['guest'])
+    ->name('login');
 
