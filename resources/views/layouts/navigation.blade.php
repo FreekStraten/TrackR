@@ -4,6 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
+                @auth
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('homepage') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
@@ -11,6 +12,10 @@
                 </div>
 
                 <!-- Navigation Links -->
+
+
+
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     {{-- <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                          {{ __('Home') }}
@@ -61,7 +66,7 @@
                     @endif
 
 
-
+                    @endauth
                     <!-- dropdown to change language -->
                     <x-dropdown align="left" width="48">
                         <x-slot name="trigger">
@@ -88,6 +93,7 @@
                 </div>
             </div>
 
+            @auth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
@@ -178,5 +184,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
 </nav>
