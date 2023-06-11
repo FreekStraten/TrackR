@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
     <!-- list of all users -->
-<div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="container">
@@ -47,7 +47,8 @@
                                         <form action="{{ route('admin.destroy', $user->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">{{ __('admin.delete') }}</button>
+                                            <button type="submit"
+                                                    class="btn btn-danger">{{ __('admin.delete') }}</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -58,6 +59,6 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 
 </x-app-layout>

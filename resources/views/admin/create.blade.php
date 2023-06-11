@@ -1,17 +1,17 @@
-<x-app-layout>
+    <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('admin.admin') }}
         </h2>
     </x-slot>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">{{ __('admin.create') }}</div>
 
                     <div class="card-body">
-                        <form method="POST"action="{{ route('admin.store') }}" >
+                        <form method="POST" action="{{ route('admin.store') }}" >
                             @csrf
 
                             <div class="form-group row">
@@ -68,7 +68,7 @@
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit"
                                             class="btn btn-primary">
-                                        {{ __('create_user') }}
+                                        {{ __('admin.create_user') }}
                                     </button>
                                 </div>
                             </div>
