@@ -170,7 +170,7 @@ class PacketController extends Controller
             return response()->json(['message' => 'Packet created successfully.', 'packet' => $packet], 201);
         }
 
-        return view('packetCreate')->with('success', 'Packet created successfully.');
+        return $this->index($request);
     }
 
 
