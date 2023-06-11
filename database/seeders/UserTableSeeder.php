@@ -80,6 +80,17 @@ class UserTableSeeder extends Seeder
             'user_role' => 5,
         ]);
 
+        // reciever acount
+        DB::table('users')->insert([
+            'name' => 'cas',
+            'email' => 'cas@gmail.nl',
+            'password' => hash::make('cas'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_role' => 5,
+        ]);
+
+
         // PackagePacker acount
         DB::table('users')->insert([
             'name' => 'packer',

@@ -10,6 +10,33 @@ use Illuminate\Http\Request;
 
 class RecieversController extends Controller
 {
+    public function track(){
+        // return view
+        return view('recievers.show');
+
+    }
+
+    public function trackPacket(Request $request){
+        // validate the request contains tracking_number
+        $request->validate([
+            'tracking_number' => 'required'
+        ]);
+        // get the tracking number
+        $id = $request->input('tracking_number');
+        // get the packet
+        $packet = Packet::where('id', $id)->first();
+
+        // if it doesn't exist, return error
+        if(!$packet){
+            return view('recievers.show', ['error' => __('reciever.tracking_error')]);
+        }
+
+        $packet->status = PackageStatus::where('id', $packet->package_status_id)->first()->name;
+        // return view
+        return view('recievers.trackedPacket', ['packet' => $packet]);
+    }
+
+
     public function index(Request $request)
     {
         $user = auth()->user();
@@ -76,6 +103,21 @@ class RecieversController extends Controller
             'sortDirection' => $sortDirection,
             'searchTerm' => $searchTerm,
         ]);
+    }
+
+    public function addPacketToTracking(Request $request){
+        // validate the request contains tracking_number
+        $request->validate([
+            'tracking_number' => 'required|exists:packets,tracking_number'
+        ]);
+        // get the tracking number
+        $id = $request->input('tracking_number');
+        // get the packet
+        $packet = Packet::where('id', $id)->first();
+        $packet->user_id = auth()->user()->id;
+        $packet->save();
+        return redirect()->back();
+
     }
 
     public function history(Request $request)
