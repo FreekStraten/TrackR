@@ -17,6 +17,14 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('restrict');
         });
+
+        Schema::table('packets', function (Blueprint $table) {
+            $table->foreignId('creator_id')
+
+                ->nullable()
+                ->constrained('users')
+                ->onDelete('restrict');
+        });
     }
 
     /**
@@ -26,6 +34,10 @@ return new class extends Migration
     {
         Schema::table('packets', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
+        });
+
+        Schema::table('packets', function (Blueprint $table) {
+            $table->dropForeign(['creator_id']);
         });
     }
 };

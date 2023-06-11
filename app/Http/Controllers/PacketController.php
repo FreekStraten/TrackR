@@ -145,7 +145,7 @@ class PacketController extends Controller
     {
         $user = auth()->user();
         $token = $user->createToken('auth_token')->plainTextToken;
-        
+
         $packetData = [
             'date' => $request->input('date'),
             'tracking_number' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
@@ -162,6 +162,7 @@ class PacketController extends Controller
         ];
 
         $packet = new Packet($packetData);
+        $packet->creator_id = $user->id;
         $packet->save();
 
         //if request is json then return json response

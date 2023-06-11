@@ -74,6 +74,6 @@ class User extends Authenticatable
 
     public function packets()
     {
-        return $this->hasMany(Packet::class, 'user_id');
+        return $this->hasMany(Packet::class, 'creator_id');
     }
 }
