@@ -12,6 +12,17 @@
 
     <div class="pt-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <form action="{{ route('recievers.addpackage') }}" method="POST">
+                @csrf
+                <div>
+                    <label for="tracking_number" class="block font-medium text-sm text-gray-700">{{__('reciever.TrackingNumber')}}</label>
+                    <input type="text" name="tracking_number" id="tracking_number" class="mt-1 p-2 border border-gray-300 rounded-md" required>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">{{__('reciever.StartTracking')}}</button>
+                </div>
+            </form>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-2.5 flex justify-between items-center">
 
                 <div class="w-4/5 ml-2 flex">

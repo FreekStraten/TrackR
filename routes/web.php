@@ -49,7 +49,9 @@ Route::post('/pickups/store', [\App\Http\Controllers\PickupsController::class, '
 Route::get('/recievers', [\App\Http\Controllers\RecieversController::class, 'index'])->name('recievers.index')->middleware('auth');
 Route::get('/recievers/history', [\App\Http\Controllers\RecieversController::class, 'history'])->name('recievers.history')->middleware('auth');
 Route::post('/recievers/feedback', [\App\Http\Controllers\RecieversController::class, 'giveFeedback'])->name('recievers.givefeedback')->middleware('auth');
-
+Route::get('/track', [\App\Http\Controllers\RecieversController::class, 'track'])->name('recievers.track');
+Route::post('/track', [\App\Http\Controllers\RecieversController::class, 'trackPacket'])->name('recievers.track');
+Route::post('/addtracking', [\App\Http\Controllers\RecieversController::class, 'addPacketToTracking'])->name('recievers.addpackage')->middleware('auth');
 // packetLabels
 Route::get('/packetLabel/{id}', [App\Http\Controllers\PacketController::class, 'packetLabel'])->name('packetLabel')->middleware('auth');
 Route::get('/packetLabels', [App\Http\Controllers\PacketController::class, 'packetLabels'])->name('packetLabels')->middleware('auth');

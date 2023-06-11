@@ -25,6 +25,11 @@ class PacketController extends Controller
     {
         $user = auth()->user();
 
+        // if the user is reciever
+        if ($user->isReciever()) {
+            return redirect()->route('recievers.index');
+        }
+
         $format = $request->input('format');
         $sortByDate = $request->input('sortByDate');
         $sortDirection = $request->input('sortDirection');
