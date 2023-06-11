@@ -19,7 +19,7 @@
         <div class="pt-10">
             <div
                 class="bg-white overflow-hidden shadow-xl sm:rounded-lg inline-block px-2 mr-1 cursor-pointer active-tab"
-                data-tab="tab1">
+                data-tab="tab1" dusk="tab1">
                 {{ __('messages.forum') }}
             </div>
         </div>
