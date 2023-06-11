@@ -55,4 +55,25 @@ class ExampleTest extends DuskTestCase
                 ->assertVisible('#packets-table');
         });
     }
+
+    public function testCsvUpload()
+    {
+        $csvFilePath = public_path('test.csv');
+
+        if (!file_exists($csvFilePath)) {
+            throw new \RuntimeException("CSV file not found: {$csvFilePath}");
+        }
+
+        $this->browse(function (Browser $browser) use ($csvFilePath) {
+            $browser->visit(route('create-package'))
+                ->pause(500) // Add a pause to ensure the page is fully loaded
+                ->click('@tab2') // Make sure the desired tab is active
+                ->attach('csv_file', $csvFilePath)
+                ->press(__('messages.upload'))
+                ->waitForReload();
+        });
+    }
+
+
 }
+
