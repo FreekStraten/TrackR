@@ -26,7 +26,7 @@
 
         <div class="pt-10">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg inline-block px-2 cursor-pointer"
-                 data-tab="tab2">
+                 data-tab="tab2" dusk="tab2">
                 {{ __('messages.add_csv') }}
             </div>
         </div>

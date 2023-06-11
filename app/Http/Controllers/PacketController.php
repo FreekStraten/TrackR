@@ -10,6 +10,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\PDF;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
@@ -32,12 +33,6 @@ class PacketController extends Controller
         $searchTerm = $request->input('search');
 
         $query = $user->packets();
-
-//        //create a QR code for each packet
-//        $packets = $query->get();
-//        foreach ($packets as $packet) {
-//            $packet->qr_code = QrCode::size(200)->generate($packet->tracking_number);
-//        }
 
         //search the packets by the search term using Full Text Search on the key name is fulltext_i_delivery
         if (!empty($searchTerm)) {
@@ -150,8 +145,8 @@ class PacketController extends Controller
 
         //if user has role
         Facades\Log::info('test');
-        Facades\Log::info('Authenticated User: '.$user);
-        Facades\Log::info('CSRF Token: '.$token);
+        Facades\Log::info('Authenticated User: ' . $user);
+        Facades\Log::info('CSRF Token: ' . $token);
 
         $packetData = [
             'date' => $request->input('date'),
@@ -179,12 +174,10 @@ class PacketController extends Controller
     }
 
 
-
-
-    public
     function uploadCsv(Request $request)
     {
         $file = $request->file('csv_file');
+        $loggedInUserId = Auth::id();
 
         if (($handle = fopen($request->file('csv_file')->getPathname(), 'r')) !== false) {
 
@@ -196,17 +189,18 @@ class PacketController extends Controller
 
                 $packet = new Packet();
                 $packet->date = $data[0];
-                $packet->tracking_number = $data[1];
-                $packet->format = $data[2];
-                $packet->weight = $data[3];
-                $packet->shipping_street = $data[4];
-                $packet->shipping_house_number = $data[5];
-                $packet->shipping_city = $data[6];
-                $packet->shipping_zip_code = $data[7];
-                $packet->delivery_street = $data[8];
-                $packet->delivery_house_number = $data[9];
-                $packet->delivery_city = $data[10];
-                $packet->delivery_zip_code = $data[11];
+                $packet->tracking_number = \Ramsey\Uuid\Uuid::uuid4()->toString();
+                $packet->format = $data[1];
+                $packet->weight = $data[2];
+                $packet->shipping_street = $data[3];
+                $packet->shipping_house_number = $data[4];
+                $packet->shipping_city = $data[5];
+                $packet->shipping_zip_code = $data[6];
+                $packet->delivery_street = $data[7];
+                $packet->delivery_house_number = $data[8];
+                $packet->delivery_city = $data[9];
+                $packet->delivery_zip_code = $data[10];
+                $packet->user_id = $loggedInUserId;
 
                 $packet->save();
             }
