@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('homepage') }}">
+                    <a href="{{ route('homepage') }}" dusk="nav-homepage">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
@@ -20,19 +20,19 @@
 {{--                    </x-nav-link>--}}
 
                     @if(!is_null(Auth::user()) && Auth::user()->isSuperAdmin() || Auth::user()->isUser())
-                    <x-nav-link :href="route('create-package')" :active="request()->routeIs('create-package')">
+                    <x-nav-link :href="route('create-package')" dusk="nav-create-package" :active="request()->routeIs('create-package')">
                         {{ __('messages.create_packet') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('user-packets-list')" :active="request()->routeIs('user-packets-list')">
+                    <x-nav-link :href="route('user-packets-list')" dusk="nav-packets-list" :active="request()->routeIs('user-packets-list')">
                         {{ __('messages.packets_list') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('pickups.index')" :active="request()->routeIs('pickups.index')">
+                    <x-nav-link :href="route('pickups.index')" dusk="nav-pickups" :active="request()->routeIs('pickups.index')">
                         {{ __('nav.pickups_list') }}
                     </x-nav-link>
 
-                        <x-nav-link :href="route('calendar.index')" :active="request()->routeIs('pickups.index')">
+                        <x-nav-link :href="route('calendar.index')" dusk="nav-calendar" :active="request()->routeIs('pickups.index')">
                             {{ __('nav.calendar') }}
                         </x-nav-link>
 
@@ -40,11 +40,11 @@
                     @endif
 
                     @if(!is_null(Auth::user()) && Auth::user()->isReciever())
-                        <x-nav-link :href="route('recievers.index')" :active="request()->routeIs('recievers.index')">
+                        <x-nav-link :href="route('recievers.index')" dusk="nav-recievers-index" :active="request()->routeIs('recievers.index')">
                             {{ __('nav.mypackages') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('recievers.history')" :active="request()->routeIs('recievers.history')">
+                        <x-nav-link :href="route('recievers.history')" dusk="nav-recievers-history" :active="request()->routeIs('recievers.history')">
                             {{ __('nav.recievershistory') }}
                         </x-nav-link>
                     @endif
@@ -53,7 +53,7 @@
 
 
                     @if(!is_null(Auth::user()) && Auth::user()->isSuperAdmin())
-                    <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
+                    <x-nav-link :href="route('admin.index')" dusk="nav-admin-index" :active="request()->routeIs('admin.index')">
                         {{ __('nav.accounts') }}
                     </x-nav-link>
 
@@ -92,7 +92,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button dusk="nav-profile" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             @if(!is_null(Auth::user()))
                                 <div>{{ Auth::user()->name }}</div>
                             @else
@@ -117,7 +117,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-dropdown-link :href="route('logout')"
+                                <x-dropdown-link dusk="nav-logout" :href="route('logout')"
                                                  onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                     {{ __('Login.LogOut') }}

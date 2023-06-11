@@ -50,8 +50,6 @@ class ChangeLanguageTest extends DuskTestCase
                 ->pause(500)
                 ->assertSee('Language');
         });
-
     }
-
 
 }
