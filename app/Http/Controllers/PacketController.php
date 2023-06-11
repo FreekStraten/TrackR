@@ -139,15 +139,8 @@ class PacketController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user();
-
-        //log "test"
         $token = $user->createToken('auth_token')->plainTextToken;
-
-        //if user has role
-        Facades\Log::info('test');
-        Facades\Log::info('Authenticated User: ' . $user);
-        Facades\Log::info('CSRF Token: ' . $token);
-
+        
         $packetData = [
             'date' => $request->input('date'),
             'tracking_number' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
@@ -163,7 +156,8 @@ class PacketController extends Controller
             'delivery_zip_code' => $request->input('delivery_zipcode'),
         ];
 
-        $packet = $user->packets()->create($packetData);
+        $packet = new Packet($packetData);
+        $packet->save();
 
         //if request is json then return json response
         if ($request->wantsJson()) {
@@ -231,21 +225,21 @@ class PacketController extends Controller
         return redirect()->back()->with('success', 'Delivery driver added successfully.');
     }
 
-    public
-    function createLabels()
-    {
-        $user = auth()->user(); // Get the authenticated user
-        $packets = $user->packets; // Get all packets associated with the user
+        public
+        function createLabels()
+        {
+            $user = auth()->user(); // Get the authenticated user
+            $packets = $user->packets; // Get all packets associated with the user
 
-        //add qr code to the packets
-        foreach ($packets as $packet) {
-            $qrCode = QrCode::size(250)->generate($packet->tracking_number);
-            $packet->qrCode = $qrCode;
+            //add qr code to the packets
+            foreach ($packets as $packet) {
+                $qrCode = QrCode::size(250)->generate($packet->tracking_number);
+                $packet->qrCode = $qrCode;
+            }
+
+            $pdf = app('dompdf.wrapper')->loadView('packetLabels', compact('packets'));
+            return $pdf->download('packetLabel.pdf');
         }
-
-        $pdf = app('dompdf.wrapper')->loadView('packetLabels', compact('packets'));
-        return $pdf->download('packetLabel.pdf');
-    }
 
     //create a pdf packet label for the packet use dompdf
     public
