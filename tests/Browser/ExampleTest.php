@@ -8,6 +8,24 @@ use Tests\DuskTestCase;
 
 class ExampleTest extends DuskTestCase
 {
+    public function testExample(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/login')
+                ->pause(500)
+                ->type('email', 'normal@user.com')
+                ->pause(500)
+                ->type('password', 'user')
+                ->pause(500)
+                ->click('@login')
+                ->pause(750)
+                ->visit('/')
+                ->pause(750)
+                ->assertPathIs('/');
+        });
+    }
+
+
     public function testFormSubmission()
     {
         $this->browse(function (Browser $browser) {
