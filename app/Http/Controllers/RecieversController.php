@@ -51,7 +51,7 @@ class RecieversController extends Controller
 
         $searchTerm = $request->input('search');
 
-        $query = $user->packets();
+        $query = Packet::where('user_id', $user->id);
 
         //search the packets by the search term using Full Text Search on the key name is fulltext_i_delivery
         if (!empty($searchTerm)) {
@@ -108,12 +108,15 @@ class RecieversController extends Controller
     public function addPacketToTracking(Request $request){
         // validate the request contains tracking_number
         $request->validate([
-            'tracking_number' => 'required|exists:packets,tracking_number'
+            'tracking_number' => 'required'
         ]);
         // get the tracking number
         $id = $request->input('tracking_number');
         // get the packet
         $packet = Packet::where('id', $id)->first();
+        if (!$packet) {
+            return redirect()->back()->withErrors(['Packet not found']);
+        }
         $packet->user_id = auth()->user()->id;
         $packet->save();
         return redirect()->back();

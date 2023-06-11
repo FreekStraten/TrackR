@@ -19,9 +19,9 @@ Route::get('/', [\App\Http\Controllers\MainController::class, 'index'])->name('h
 Route::get('/homepage', [\App\Http\Controllers\MainController::class, 'index'])->name('homepage')->middleware('auth');
 
 //packets
-Route::get('/create-package', function () { return view('packetCreate');})->name('create-package');
-Route::post('/store-package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
-Route::post('/package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store');
+Route::get('/create-package', function () { return view('packetCreate');})->name('create-package')->middleware('auth');
+Route::post('/store-package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store')->middleware('auth');
+Route::post('/package', [App\Http\Controllers\PacketController::class, 'store'])->name('packet_create.store')->middleware('auth');
 Route::post('/package_csv', [App\Http\Controllers\PacketController::class, 'uploadCsv'])->name('packet_create.uploadCsv');
 Route::middleware('api')->post('/api/packages', [App\Http\Controllers\PacketController::class, 'store']);
 //packets list
