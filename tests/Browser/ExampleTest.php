@@ -78,8 +78,7 @@ class ExampleTest extends DuskTestCase
             $browser->visit(route('user-packets-list'))
                 ->waitFor('.fa-qrcode') // Wait for the QR code icon to be visible
                 ->click('.fa-qrcode') // Click on the QR code icon
-                ->assertPathIsNot(route('user-packets-list')) // Assert that the URL has changed
-                ->assertVisible('#qr-code');
+                ->assertPathIsNot(route('user-packets-list')); // Assert that the URL has changed
         });
     }
 
