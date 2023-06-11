@@ -26,9 +26,9 @@ class UserTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Normal user',
-            'email' => 'normal@user.com',
-            'password' => hash::make('user'),
+            'name' => 'WebshopNL',
+            'email' => 'WebshopNL@company.com',
+            'password' => hash::make('webshop'),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'user_role' => 2,

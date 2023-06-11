@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('packets', function (Blueprint $table) {
             $table->foreignId('user_id')
+                ->nullable()
                 ->constrained()
                 ->onDelete('restrict');
         });
