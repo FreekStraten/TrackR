@@ -17,14 +17,12 @@ class RecieversController extends Controller
     }
 
     public function trackPacket(Request $request){
-        // validate the request contains tracking_number
-        $request->validate([
-            'tracking_number' => 'required'
-        ]);
-        // get the tracking number
+
+        // get the tra  cking number
         $id = $request->input('tracking_number');
+
         // get the packet
-        $packet = Packet::where('id', $id)->first();
+        $packet = Packet::where('tracking_number', $id)->first();
 
         // if it doesn't exist, return error
         if(!$packet){
