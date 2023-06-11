@@ -22,32 +22,23 @@
 
                         <label for="format" class="sr-only">{{ __('messages.format') }}</label>
                         <select name="format" id="format" class="form-control mr-2" onchange="this.form.submit()">
-                            <option
-                                value=""{{ empty($selectedFormat) ? ' selected' : '' }}>{{ __('messages.all_formats') }}</option>
-                            <option
-                                value="letter"{{ $selectedFormat === 'letter' ? ' selected' : '' }}>{{ __('messages.letter') }}</option>
-                            <option
-                                value="parcel"{{ $selectedFormat === 'parcel' ? ' selected' : '' }}>{{ __('messages.parcel') }}</option>
+                            <option value=""{{ empty($selectedFormat) ? ' selected' : '' }}>{{ __('messages.all_formats') }}</option>
+                            <option value="letter"{{ $selectedFormat === 'letter' ? ' selected' : '' }}>{{ __('messages.letter') }}</option>
+                            <option value="parcel"{{ $selectedFormat === 'parcel' ? ' selected' : '' }}>{{ __('messages.parcel') }}</option>
                         </select>
 
                         <label for="sortByDate" class="sr-only">{{ __('messages.sort_by_date') }}</label>
-                        <select name="sortByDate" id="sortByDate" class="form-control mr-2"
-                                onchange="this.form.submit()">
+                        <select name="sortByDate" id="sortByDate" class="form-control mr-2" onchange="this.form.submit()">
                             <option value="">{{ __('messages.no_date') }}</option>
-                            <option
-                                value="asc"{{ $sortByDate === 'asc' ? ' selected' : '' }}>{{ __('messages.date_asc') }}</option>
-                            <option
-                                value="desc"{{ $sortByDate === 'desc' ? ' selected' : '' }}> {{__('messages.date_desc') }}</option>
+                            <option value="asc"{{ $sortByDate === 'asc' ? ' selected' : '' }}>{{ __('messages.date_asc') }}</option>
+                            <option value="desc"{{ $sortByDate === 'desc' ? ' selected' : '' }}>{{__('messages.date_desc') }}</option>
                         </select>
 
                         <label for="sortDirection" class="sr-only">{{ __('messages.  sort_direction') }}</label>
-                        <select name="sortDirection" id="sortDirection" class="form-control mr-2"
-                                onchange="this.form.submit()">
+                        <select name="sortDirection" id="sortDirection" class="form-control mr-2" onchange="this.form.submit()">
                             <option value="">{{ __('messages.no_weight') }}</option>
-                            <option
-                                value="asc"{{ $sortDirection === 'asc' ? ' selected' : '' }}>{{ __('messages.weight_asc') }}</option>
-                            <option
-                                value="desc"{{ $sortDirection === 'desc' ? ' selected' : '' }}> {{__('messages.weight_desc') }}</option>
+                            <option value="asc"{{ $sortDirection === 'asc' ? ' selected' : '' }}>{{ __('messages.weight_asc') }}</option>
+                            <option value="desc"{{ $sortDirection === 'desc' ? ' selected' : '' }}>{{__('messages.weight_desc') }}</option>
                         </select>
 
                         <input type="hidden" name="page" value="{{ $packets->currentPage() }}">
@@ -63,7 +54,7 @@
 
                 <div class="text-right mr-2">
                     <a href="{{ route('createLabels') }}"
-                       class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-md shadow-md no-underline">{{ __('messages.bulk_pdf') }}</a>
+                       class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-3 rounded-md shadow-md no-underline" dusk="bulk-pdf-link">{{ __('messages.bulk_pdf') }}</a>
                 </div>
             </div>
         </div>

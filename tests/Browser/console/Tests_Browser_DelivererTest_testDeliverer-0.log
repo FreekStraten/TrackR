@@ -1,8 +1,0 @@
-[
-    {
-        "level": "SEVERE",
-        "message": "http:\/\/127.0.0.1:8000\/packets 284:157 Uncaught TypeError: Cannot read properties of null (reading 'submit')",
-        "source": "javascript",
-        "timestamp": 1686501306067
-    }
-]
