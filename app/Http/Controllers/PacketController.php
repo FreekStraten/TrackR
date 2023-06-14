@@ -146,6 +146,11 @@ class PacketController extends Controller
         $user = auth()->user();
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        //if user has role
+        Facades\Log::info('test');
+        Facades\Log::info('Authenticated User: '.$user);
+        Facades\Log::info('CSRF Token: '.$token);
+
         $packetData = [
             'date' => $request->input('date'),
             'tracking_number' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
