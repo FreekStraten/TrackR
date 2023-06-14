@@ -205,7 +205,7 @@ class PacketController extends Controller
                 $packet->delivery_house_number = $data[8];
                 $packet->delivery_city = $data[9];
                 $packet->delivery_zip_code = $data[10];
-                $packet->user_id = $loggedInUserId;
+                $packet->creator_id = $loggedInUserId;
 
                 $packet->save();
             }
