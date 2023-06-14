@@ -44,9 +44,10 @@
                                     <td>{{ $user->updated_at }}</td>
                                     <td>
 
-                                        <form action="{{ route('admin.destroy', $user->id) }}" method="POST">
+                                        <form action="{{ route('admin.destroy') }}" method="POST">
                                             @csrf
-                                            @method('DELETE')
+                                            @method('POST')
+                                            <input type="hidden" name="id" value="{{ $user->id }}">
                                             <button type="submit"
                                                     class="btn btn-danger">{{ __('admin.delete') }}</button>
                                         </form>
